@@ -2,8 +2,11 @@ import axios from "axios";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
+  let history = useHistory();
+
   const [user, setUser] = useState("");
   const [type, setType] = useState("login");
   const [error, setError] = useState(null);
@@ -12,28 +15,36 @@ const LoginPage = () => {
   // no item 'user'.
   // Caso a requisição falhe, um erro é atribuído e mensagem de erro é renderizada.
   const authenticateUser = (username) => {
-    axios
-      .get("https://pokedex20201.herokuapp.com/users/" + username)
-      .then(() => {
-        localStorage.setItem("user", username);
-      })
-      .catch((err) => {
-        setError(err);
-      });
+    if (username !== "") {
+      axios
+        .get("https://pokedex20201.herokuapp.com/users/" + username)
+        .then(() => {
+          localStorage.setItem("user", username);
+          history.goBack();
+        })
+        .catch((err) => {
+          setError(err);
+        });
+    }
   };
 
   // Tenta criar usuário na API e loga o usuário automaticamente, armazenando
   // em 'localStorage' no item 'user'.
   // Caso a requisição falhe, um erro é atribuído e mensagem de erro é renderizada.
   const createUser = (username) => {
-    axios
-      .post("https://pokedex20201.herokuapp.com/users", { username: username })
-      .then(() => {
-        localStorage.setItem("user", username);
-      })
-      .catch((err) => {
-        setError(err);
-      });
+    if (username !== "") {
+      axios
+        .post("https://pokedex20201.herokuapp.com/users", {
+          username: username,
+        })
+        .then(() => {
+          localStorage.setItem("user", username);
+          history.goBack();
+        })
+        .catch((err) => {
+          setError(err);
+        });
+    }
   };
 
   // Função que armazena valor digitado pelo usuário.
