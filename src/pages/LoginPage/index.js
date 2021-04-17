@@ -11,7 +11,7 @@ const LoginPage = () => {
   const authenticateUser = (username) => {
     axios
       .get("https://pokedex20201.herokuapp.com/users/" + username)
-      .then((res) => {
+      .then(() => {
         localStorage.setItem("user", username);
       })
       .catch((err) => {
@@ -22,7 +22,7 @@ const LoginPage = () => {
   const createUser = (username) => {
     axios
       .post("https://pokedex20201.herokuapp.com/users", { username: username })
-      .then((res) => {
+      .then(() => {
         localStorage.setItem("user", username);
       })
       .catch((err) => {
