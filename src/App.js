@@ -50,7 +50,7 @@ export default function App() {
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/login" children={<LoginPage />} />
           <Route path="/pokemons/:name" component={ShowPokemonInfo} />
-          <Route path="/:id" children={<Pokemons />} />
+          <Route path="/:pageNumber" children={<Pokemons />} />
         </Switch>
       </BrowserRouter>
     </Styled.Div>
