@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom';
-import { useState } from 'react';
-import Pokemons from './pages/Pokemons/index'
+import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
+import Pokemons from "./pages/Pokemons/index";
+import LoginPage from "./pages/LoginPage/index";
 import * as Styled from './pages/Pokemons/styles';
 import {StyledLink} from './pages/Pokemons/styles';
 
@@ -9,7 +9,7 @@ import ShowPokemonInfo from './pages/Pokemons/ShowPokemonInfo';
 export default function App() {
 
   return (
-    <Styled.Div>
+     <Styled.Div>
         <BrowserRouter>
             <Styled.P>Pages</Styled.P>
             <Link to="/"></Link>
@@ -55,9 +55,10 @@ export default function App() {
                }}
               />
               <Route path="/pokemons/:name" component={ShowPokemonInfo}/>
-              <Route path="/:id" children={<Pokemons />} />
+              <Route path="/:id" children={ <Pokemons /> } />
+              <Route path="/login" children={ <LoginPage /> } />
             </Switch>
           </BrowserRouter>
         </Styled.Div>
       );
-    }
+}
