@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Styled.Div>
         <BrowserRouter>
-            <Styled.P>Pages</Styled.P>
+            <Styled.Span>Pages</Styled.Span>
             <Link to="/"></Link>
             <StyledLink to="/favorites">Favorites</StyledLink>
             <StyledLink to="/1">1</StyledLink>
@@ -50,7 +50,7 @@ export default function App() {
             <Switch>
               <Route exact path="/" render={() => {
                 return (
-                  <Redirect to="/home" />
+                  <Redirect to="/1" />
                 )
                }}
               />

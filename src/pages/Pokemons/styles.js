@@ -10,7 +10,7 @@ export const Grid = styled.div`
 
 export const Div = styled.div`
   justify-content: center;
-  padding: 50px;
+  padding: 30px;
   background-color: beige;
 `
 
@@ -25,7 +25,7 @@ export const Li = styled.li`
   background-color: MediumSeaGreen;
 `
 
-export const P = styled.p`
+export const Span = styled.span`
    font-family: "Lucida Console", "Courier New", monospace;
    display: inline;
    color: black;
@@ -33,10 +33,26 @@ export const P = styled.p`
    background-color: MediumSeaGreen;
 `
 
-export const Button = styled.button`
+export const InfoButton = styled.button`
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: MediumSeaGreen;
+  color: purple;
   padding: 5px;
+`
+
+export const PageButton = styled.button`
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: MediumSeaGreen;
+  color: purple;
+  padding: 8px;
+  margin-left: 50px;
+  margin-right: 50px;
+`
+
+export const Page = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 `
 
 export const StyledLink = styled(Link)`

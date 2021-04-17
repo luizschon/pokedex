@@ -23,8 +23,37 @@ const Pokemons = () => {
     getPokemon(id);
   }, [id])
 
-    return (
-    <Styled.Div>  
+  const handlePreviousPage = (id) => {
+    if (id === "1"){
+      return id;
+    }
+    return parseInt(id)-1;
+  }
+
+  const handleNextPage = (id) => {
+    if (id === "33"){
+      return id;
+    }
+    return parseInt(id)+1;
+  }
+
+
+  return (
+    <div>
+    <Styled.Page>
+      <Link to={{
+        pathname: `/${handlePreviousPage(id)}`,
+        }}><Styled.PageButton>Previous</Styled.PageButton></Link>
+      <Styled.Span>{id}</Styled.Span>
+      <Link to={{
+        pathname: `/${handleNextPage(id)}`,
+        }}><Styled.PageButton>Next</Styled.PageButton></Link>
+
+</Styled.Page>
+
+
+    <Styled.Div>
+
       {pokemons.map(item =>
         <Styled.Grid key={item.id}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
@@ -34,12 +63,14 @@ const Pokemons = () => {
           <Styled.Item><Link to={{
             pathname: `/pokemons/${item.name}`,
             state: { pokemoninfo: item }
-          }}><Styled.Button>Info</Styled.Button></Link></Styled.Item>
+          }}><Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
           <br/>
         </Styled.Grid>)
-
         }
+        
     </Styled.Div>
+
+    </div>
     );
 }
 
