@@ -134,7 +134,7 @@ const Pokemons = () => {
             <br/>
             <Styled.Item><Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
             <Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
-            <Styled.Item><button onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)} >Favorite</button></Styled.Item>
+            <Styled.Item><button onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)}>Favorite</button></Styled.Item>
             <br/>
           </Styled.Grid>)
           }     
