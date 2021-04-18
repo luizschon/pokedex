@@ -68,7 +68,3 @@ export const Input = styled.input`
   text-align: center;
   font-size: 30px;
 `
-
-export const Img = styled.img`
-  height:150px;
-`

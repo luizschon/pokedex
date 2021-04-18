@@ -1,31 +1,41 @@
 import React, { useEffect, useState, useRef } from "react";
-import { BrowserRouter, Route, Switch, Link, Redirect, useParams, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, Redirect, useParams, useHistory, useLocation } from 'react-router-dom';
 import * as Styled from './styles';
+import {StyledLink} from './styles';
 import axios from "axios";
 
-import ShowPokemonInfo from './ShowPokemonInfo';
+import PokemonInfo from "../../pages/PokemonInfo/index";
 
 const Pokemons = () => {
 
-  let { id } = useParams();
+  //Define state.username como o nome do usuário
+  const { state } = useLocation();
+
   let history = useHistory();
+  //Armazena a rota da url atual em id
+  let { id } = useParams();
 
   const [pokemons, setPokemons] = useState([]);
   const [page,setPage] = useState("1");
+  const [favorites,setFavorites] = useState([]);
+  const [ids,setIds] = useState([]);
   const input = useRef();
 
+  //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
     setPokemons([])
     axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + id)
-      .then(res => {
-        setPokemons(res.data.data.map(item => item))
+      .then(result => {
+        setPokemons(result.data.data.map(item => item))
       })
   }
 
+  //Atualiza os pokemons mostrados quando a página muda
   useEffect(() => {
     getPokemon(id);
   }, [id])
 
+  //Volta para a página anterior se a página atual nao for a primeira
   const handlePreviousPage = (id) => {
     if (id === "1"){
       return id;
@@ -33,6 +43,7 @@ const Pokemons = () => {
     return parseInt(id)-1;
   }
 
+  //Avanca para a proxima página se a página atual nao for a última
   const handleNextPage = (id) => {
     if (id === "33"){
       return id;
@@ -40,23 +51,66 @@ const Pokemons = () => {
     return parseInt(id)+1;
   }
 
+  //Redireciona o usuário para a página desejada usando o input
+  //Se o input nao for válido, retorna o texto para o número da página atual
   const redirect = (page,id) => {
     if (page > 0 && page < 34){
-      history.push(`/${page}`);
+      history.push({
+        pathname: `/${page}`,
+        state: { username : state.username }
+      });
     } else {
       input.current.value = id
       return;
     }
   }
 
+  //Armazena a lista de pokemons favoritos
+  const getFavorites = (username) => {
+    axios.get(`https://pokedex20201.herokuapp.com/users/${username}`)
+      .then((result) => {
+        setFavorites(result.data.pokemons.map(item => item))
+        setIds(result.data.pokemons.map(item => item.id))
+      })
+  }
+
+  //Atualiza a lista de favoritos quando a página muda
+  useEffect(() => {
+    getFavorites(state.username);
+  }, [id])
+
+
+  //Adiciona o pokemon favoritado à API
+  //Adiciona as informações do pokemon à lista de favoritos
+  //Adiciona o id do pokemon à lista de ids dos pokemons favoritos
+  const addFavorite = (username,item) => {
+    axios
+    .post(`https://pokedex20201.herokuapp.com/users/${username}/starred/${item.name}`)
+    .then((result) => {
+      setFavorites([...favorites, item]);
+      setIds([...ids,item.id])
+    })
+  }
+
+  //Remove o pokemon favoritado da API
+  //Remove as informações do pokemon da lista de favoritos
+  //Remove o id do pokemon da lista de ids dos pokemons favoritos
+  const removeFavorite = (username,item) => {
+    axios
+    .delete(`https://pokedex20201.herokuapp.com/users/${username}/starred/${item.name}`)
+    .then((result) => {
+      setFavorites(favorites.filter((fav) => fav.id !== item.id));
+      setIds(ids.filter((fav) => fav !== item.id));
+    });
+  }
 
   return (
-    <div>
+    <Styled.Div>
+      <StyledLink to={{pathname: `/favorites`,state: { favorites: favorites }}}>Favorites</StyledLink>
+
       <Styled.PageButtonsDiv>
-        <Link to={{
-          pathname: `/${handlePreviousPage(id)}`,
-          }}>
-        <Styled.PageButton>Previous</Styled.PageButton>
+        <Link to={{pathname: `/${handlePreviousPage(id)}`,state: { username : state.username }}}>
+          <Styled.PageButton>Previous</Styled.PageButton>
         </Link>
         <Styled.Input
           type="text"
@@ -65,31 +119,26 @@ const Pokemons = () => {
           onChange={(event) => setPage(event.target.value)}
           onKeyPress={(event) => event.key === "Enter" && redirect(page,id)}
         />
-        <Link to={{
-          pathname: `/${handleNextPage(id)}`,
-          }}>
-        <Styled.PageButton>Next</Styled.PageButton>
+        <Link to={{pathname: `/${handleNextPage(id)}`,state: { username : state.username }}}>
+          <Styled.PageButton>Next</Styled.PageButton>
         </Link>
       </Styled.PageButtonsDiv>
 
-      <Styled.Div>
         {pokemons.map(item =>
           <Styled.Grid key={item.id}>
+            <div>
             <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
+            </div>
             <Styled.Item><span>{item.number}</span></Styled.Item>
             <Styled.Item><span>{item.name}</span></Styled.Item>
             <br/>
-            <Styled.Item><Link to={{
-              pathname: `/pokemons/${item.name}`,
-              state: { pokemoninfo: item }
-            }}>
-            <Styled.InfoButton>Info</Styled.InfoButton>
-            </Link></Styled.Item>
+            <Styled.Item><Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
+            <Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
+            <Styled.Item><button onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)} >Favorite</button></Styled.Item>
             <br/>
           </Styled.Grid>)
           }     
       </Styled.Div>
-    </div>
   );
 }
 
