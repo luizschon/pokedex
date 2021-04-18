@@ -19,18 +19,15 @@ export const Item = styled.div`
   justify-content: center;
 `
 
-export const Li = styled.li`
-  display: inline;
-  padding: 8px;
-  background-color: MediumSeaGreen;
-`
-
-export const Span = styled.span`
-   font-family: "Lucida Console", "Courier New", monospace;
-   display: inline;
-   color: black;
-   padding: 8px;
-   background-color: MediumSeaGreen;
+export const InfoPage = styled.div`
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 25px;
+  padding: 50px;
+  margin: 300px;
+  margin-top: 50px;
+  color: purple;
+  background-color: #A5FC7A;
+  border: solid green;
 `
 
 export const InfoButton = styled.button`
@@ -49,7 +46,7 @@ export const PageButton = styled.button`
   margin-right: 50px;
 `
 
-export const Page = styled.div`
+export const PageButtonsDiv= styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -65,15 +62,11 @@ export const StyledLink = styled(Link)`
   textDecoration: 'none';
   color: 'white'
 `
-export const Info = styled.div`
-  font-family: "Lucida Console", "Courier New", monospace;
-  font-size: 25px;
-  padding: 50px;
-  margin: 300px;
-  margin-top: 50px;
-  color: purple;
-  background-color: #A5FC7A;
-  border: solid green;
+
+export const Input = styled.input`
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
 `
 
 export const Img = styled.img`

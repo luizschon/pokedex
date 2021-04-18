@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch, Link, Redirect, useParams } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from "react";
+import { BrowserRouter, Route, Switch, Link, Redirect, useParams, useHistory } from 'react-router-dom';
 import * as Styled from './styles';
 import axios from "axios";
 
@@ -8,8 +8,11 @@ import ShowPokemonInfo from './ShowPokemonInfo';
 const Pokemons = () => {
 
   let { id } = useParams();
+  let history = useHistory();
 
   const [pokemons, setPokemons] = useState([]);
+  const[page,setPage] = useState("1");
+  const input = useRef();
 
   const getPokemon = (id) => {
     setPokemons([])
@@ -37,23 +40,39 @@ const Pokemons = () => {
     return parseInt(id)+1;
   }
 
+  const redirect = (page,id) => {
+    if (page > 0 && page < 34){
+      history.push(`/${page}`);
+    } else {
+      input.current.value = id
+      return
+    }
+  }
+
 
   return (
     <div>
-    <Styled.Page>
+    <Styled.PageButtonsDiv>
       <Link to={{
         pathname: `/${handlePreviousPage(id)}`,
-        }}><Styled.PageButton>Previous</Styled.PageButton></Link>
-      <Styled.Span>{id}</Styled.Span>
+        }}>
+      <Styled.PageButton>Previous</Styled.PageButton>
+      </Link>
+      <Styled.Input
+        type="text"
+        maxLength="2"
+        ref={input}
+        onChange={(event) => setPage(event.target.value)}
+        onKeyPress={(event) => event.key === "Enter" && redirect(page,id)}
+      />
       <Link to={{
         pathname: `/${handleNextPage(id)}`,
-        }}><Styled.PageButton>Next</Styled.PageButton></Link>
-
-</Styled.Page>
-
+        }}>
+      <Styled.PageButton>Next</Styled.PageButton>
+      </Link>
+    </Styled.PageButtonsDiv>
 
     <Styled.Div>
-
       {pokemons.map(item =>
         <Styled.Grid key={item.id}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
@@ -63,13 +82,13 @@ const Pokemons = () => {
           <Styled.Item><Link to={{
             pathname: `/pokemons/${item.name}`,
             state: { pokemoninfo: item }
-          }}><Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
+          }}>
+          <Styled.InfoButton>Info</Styled.InfoButton>
+          </Link></Styled.Item>
           <br/>
         </Styled.Grid>)
-        }
-        
+        }     
     </Styled.Div>
-
     </div>
     );
 }
