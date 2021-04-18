@@ -11,7 +11,7 @@ const Pokemons = () => {
   let history = useHistory();
 
   const [pokemons, setPokemons] = useState([]);
-  const[page,setPage] = useState("1");
+  const [page,setPage] = useState("1");
   const input = useRef();
 
   const getPokemon = (id) => {
@@ -45,52 +45,52 @@ const Pokemons = () => {
       history.push(`/${page}`);
     } else {
       input.current.value = id
-      return
+      return;
     }
   }
 
 
   return (
     <div>
-    <Styled.PageButtonsDiv>
-      <Link to={{
-        pathname: `/${handlePreviousPage(id)}`,
-        }}>
-      <Styled.PageButton>Previous</Styled.PageButton>
-      </Link>
-      <Styled.Input
-        type="text"
-        maxLength="2"
-        ref={input}
-        onChange={(event) => setPage(event.target.value)}
-        onKeyPress={(event) => event.key === "Enter" && redirect(page,id)}
-      />
-      <Link to={{
-        pathname: `/${handleNextPage(id)}`,
-        }}>
-      <Styled.PageButton>Next</Styled.PageButton>
-      </Link>
-    </Styled.PageButtonsDiv>
-
-    <Styled.Div>
-      {pokemons.map(item =>
-        <Styled.Grid key={item.id}>
-          <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
-          <Styled.Item><span>{item.number}</span></Styled.Item>
-          <Styled.Item><span>{item.name}</span></Styled.Item>
-          <br/>
-          <Styled.Item><Link to={{
-            pathname: `/pokemons/${item.name}`,
-            state: { pokemoninfo: item }
+      <Styled.PageButtonsDiv>
+        <Link to={{
+          pathname: `/${handlePreviousPage(id)}`,
           }}>
-          <Styled.InfoButton>Info</Styled.InfoButton>
-          </Link></Styled.Item>
-          <br/>
-        </Styled.Grid>)
-        }     
-    </Styled.Div>
+        <Styled.PageButton>Previous</Styled.PageButton>
+        </Link>
+        <Styled.Input
+          type="text"
+          maxLength="2"
+          ref={input}
+          onChange={(event) => setPage(event.target.value)}
+          onKeyPress={(event) => event.key === "Enter" && redirect(page,id)}
+        />
+        <Link to={{
+          pathname: `/${handleNextPage(id)}`,
+          }}>
+        <Styled.PageButton>Next</Styled.PageButton>
+        </Link>
+      </Styled.PageButtonsDiv>
+
+      <Styled.Div>
+        {pokemons.map(item =>
+          <Styled.Grid key={item.id}>
+            <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
+            <Styled.Item><span>{item.number}</span></Styled.Item>
+            <Styled.Item><span>{item.name}</span></Styled.Item>
+            <br/>
+            <Styled.Item><Link to={{
+              pathname: `/pokemons/${item.name}`,
+              state: { pokemoninfo: item }
+            }}>
+            <Styled.InfoButton>Info</Styled.InfoButton>
+            </Link></Styled.Item>
+            <br/>
+          </Styled.Grid>)
+          }     
+      </Styled.Div>
     </div>
-    );
+  );
 }
 
 export default Pokemons
