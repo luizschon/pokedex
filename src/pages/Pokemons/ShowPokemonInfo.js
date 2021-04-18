@@ -15,6 +15,10 @@ const ShowPokemonInfo = () => {
   }
 
   return (
+    <div>
+    <Styled.PageButtonsDiv>
+      <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>
+    </Styled.PageButtonsDiv>
     <Styled.InfoPage>
        <Styled.Item><strong>{state.pokemoninfo.id}</strong></Styled.Item>
        <Styled.Item><Styled.Img src={state.pokemoninfo.image_url} alt={state.pokemoninfo.name}/></Styled.Item>
@@ -26,6 +30,7 @@ const ShowPokemonInfo = () => {
       <br/>
       <Styled.Item><strong>Kind: {handleType(state.pokemoninfo.kind)}</strong></Styled.Item>
     </Styled.InfoPage>
+    </div>
   );
 };
 
