@@ -7,7 +7,6 @@ import axios from "axios";
 import PokemonInfo from "../../pages/PokemonInfo/index";
 
 const Pokemons = () => {
-  let { pageNumber } = useParams();
 
   //Define state.username como o nome do usuário
   const { state } = useLocation();
@@ -15,7 +14,14 @@ const Pokemons = () => {
   let history = useHistory();
   //Armazena a rota da url atual em id
   let { id } = useParams();
-  
+
+  const [pokemons, setPokemons] = useState([]);
+  const [originalPage,setOriginalPage] = useState("1");
+  const [page,setPage] = useState(originalPage);
+  const [favorites,setFavorites] = useState([]);
+  const [ids,setIds] = useState([]);
+  const input = useRef();
+
   //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
     setPokemons([])
@@ -26,9 +32,14 @@ const Pokemons = () => {
   }
 
   //Atualiza os pokemons mostrados quando a página muda
+  //Atualiza a lista de favoritos quando a página muda
+  //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
-    getPokemon(pageNumber);
-  }, [pageNumber]);
+    getPokemon(id);
+    getFavorites(state.username);
+    setPage(id)
+    setOriginalPage(id)
+  }, [id])
 
   //Volta para a página anterior se a página atual nao for a primeira
   const handlePreviousPage = (id) => {
@@ -38,7 +49,7 @@ const Pokemons = () => {
     return parseInt(id)-1;
   }
 
-  //Avanca para a proxima página se a página atual nao for a última
+  //Avança para a proxima página se a página atual nao for a última
   const handleNextPage = (id) => {
     if (id === "33"){
       return id;
@@ -48,14 +59,14 @@ const Pokemons = () => {
 
   //Redireciona o usuário para a página desejada usando o input
   //Se o input nao for válido, retorna o texto para o número da página atual
-  const redirect = (page,id) => {
+  const redirect = (page) => {
     if (page > 0 && page < 34){
       history.push({
         pathname: `/${page}`,
         state: { username : state.username }
       });
     } else {
-      input.current.value = id
+      setPage(originalPage)
       return;
     }
   }
@@ -68,12 +79,6 @@ const Pokemons = () => {
         setIds(result.data.pokemons.map(item => item.id))
       })
   }
-
-  //Atualiza a lista de favoritos quando a página muda
-  useEffect(() => {
-    getFavorites(state.username);
-  }, [id])
-
 
   //Adiciona o pokemon favoritado à API
   //Adiciona as informações do pokemon à lista de favoritos
@@ -110,9 +115,9 @@ const Pokemons = () => {
         <Styled.Input
           type="text"
           maxLength="2"
-          ref={input}
+          value={page}
           onChange={(event) => setPage(event.target.value)}
-          onKeyPress={(event) => event.key === "Enter" && redirect(page,id)}
+          onKeyPress={(event) => event.key === "Enter" && redirect(page)}
         />
         <Link to={{pathname: `/${handleNextPage(id)}`,state: { username : state.username }}}>
           <Styled.PageButton>Next</Styled.PageButton>
@@ -137,5 +142,4 @@ const Pokemons = () => {
   );
 }
 
-
-export default Pokemons;
+export default Pokemons
