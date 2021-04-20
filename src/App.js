@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom';
-import { useState } from 'react';
+import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Pokemons from './pages/Pokemons/index'
 import Favorites from "./pages/Favorites/index";
 import LoginPage from "./pages/LoginPage/index";

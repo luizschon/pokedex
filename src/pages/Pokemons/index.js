@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import { BrowserRouter, Route, Switch, Link, Redirect, useParams, useHistory, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
 import * as Styled from './styles';
 import {StyledLink} from './styles';
 import axios from "axios";
-
-import PokemonInfo from "../../pages/PokemonInfo/index";
 
 const Pokemons = () => {
 
@@ -35,7 +33,7 @@ const Pokemons = () => {
   //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
     getPokemon(id);
-    getFavorites(state.username);
+    getFavorites(id);
     setPage(id)
     setOriginalPage(id)
   }, [id])
