@@ -7,10 +7,8 @@ const Favorites = () => {
 
   return(
     <Styled.Div>
-      <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>
-      
-      {state.favorites === [] ?
-      state.favorites.map(item =>
+      <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>    
+      {state.favorites.map(item =>
       <Styled.Grid key={item.id}>
         <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
@@ -19,8 +17,6 @@ const Favorites = () => {
         <Styled.Item><span>{item.name}</span></Styled.Item>
         <br/>
       </Styled.Grid>)
-      :
-      <Styled.Span>Nenhum pokemon favorito ainda</Styled.Span>
       }
     </Styled.Div>
   );

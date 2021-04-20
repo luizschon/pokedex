@@ -33,7 +33,7 @@ const Pokemons = () => {
   //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
     getPokemon(id);
-    getFavorites(id);
+    getFavorites(state.username);
     setPage(id)
     setOriginalPage(id)
   }, [id])
