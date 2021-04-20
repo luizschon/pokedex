@@ -1,11 +1,9 @@
-
 import axios from "axios";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import SearchBar from "../../components/SearchBar/SearchBar"
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-import Pokemons from "../../pages/Pokemons/index";
 
 const LoginPage = () => {
   let history = useHistory();
@@ -85,7 +83,7 @@ const LoginPage = () => {
         {type === "login" ? (
           <>
             <h2>Log-in</h2>
-            <Input changeInput={changeInput} />
+            <Input placeholder="Username" changeInput={changeInput} />
             {error ? <p>Esse usuário não existe!</p> : <></>}
             <Button type="submit" title="Entrar" />
             <Button title="Criar conta" changeForm={changeForm} />
@@ -93,7 +91,7 @@ const LoginPage = () => {
         ) : (
           <>
             <h2>Sign-up</h2>
-            <Input changeInput={changeInput} />
+            <Input placeholder="Username" changeInput={changeInput} />
             {error ? <p>Esse usuário já está cadastrado!</p> : <></>}
             <Button type="submit" title="Criar conta" />
             <Button title="Login na conta" changeForm={changeForm} />
