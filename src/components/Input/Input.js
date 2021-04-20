@@ -1,4 +1,4 @@
-const Input = ({ placeholder, changeInput, searchPokemon }) => {
+const Input = ({ placeholder, changeInput }) => {
 
   return (
     <div>
