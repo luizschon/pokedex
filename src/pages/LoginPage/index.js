@@ -1,8 +1,11 @@
+
 import axios from "axios";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
+import Pokemons from "../../pages/Pokemons/index";
 
 const LoginPage = () => {
   let history = useHistory();
@@ -20,7 +23,11 @@ const LoginPage = () => {
         .get("https://pokedex20201.herokuapp.com/users/" + username)
         .then(() => {
           localStorage.setItem("user", username);
-          history.goBack();
+
+          history.push({
+            pathname: '/1',
+            state: { username: user }
+          });
         })
         .catch((err) => {
           setError(err);
@@ -39,7 +46,10 @@ const LoginPage = () => {
         })
         .then(() => {
           localStorage.setItem("user", username);
-          history.goBack();
+          history.push({
+            pathname: '/1',
+            state: { user: username }
+          })
         })
         .catch((err) => {
           setError(err);
@@ -59,7 +69,9 @@ const LoginPage = () => {
     setType(type === "login" ? "signup" : "login");
   };
 
-  // Função que controla o submit do form entre auteticação e crriação de
+
+  // Função que controla o submit do form entre auteticação e criação de
+
   // usuário.
   const handleSubmit = (event, user) => {
     event.preventDefault();

@@ -1,4 +1,5 @@
 const Input = ({ title, changeInput }) => {
+
   return (
     <div>
       <p>{title}</p>

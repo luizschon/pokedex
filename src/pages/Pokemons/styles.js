@@ -10,7 +10,7 @@ export const Grid = styled.div`
 
 export const Div = styled.div`
   justify-content: center;
-  padding: 50px;
+  padding: 30px;
   background-color: beige;
 `
 
@@ -19,24 +19,37 @@ export const Item = styled.div`
   justify-content: center;
 `
 
-export const Li = styled.li`
-  display: inline;
-  padding: 8px;
-  background-color: MediumSeaGreen;
+export const InfoPage = styled.div`
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 25px;
+  padding: 50px;
+  margin: 300px;
+  margin-top: 50px;
+  color: purple;
+  background-color: #A5FC7A;
+  border: solid green;
 `
 
-export const P = styled.p`
-   font-family: "Lucida Console", "Courier New", monospace;
-   display: inline;
-   color: black;
-   padding: 8px;
-   background-color: MediumSeaGreen;
-`
-
-export const Button = styled.button`
+export const InfoButton = styled.button`
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: MediumSeaGreen;
+  color: purple;
   padding: 5px;
+`
+
+export const PageButton = styled.button`
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: MediumSeaGreen;
+  color: purple;
+  padding: 8px;
+  margin-left: 50px;
+  margin-right: 50px;
+`
+
+export const PageButtonsDiv= styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 `
 
 export const StyledLink = styled(Link)`
@@ -49,17 +62,9 @@ export const StyledLink = styled(Link)`
   textDecoration: 'none';
   color: 'white'
 `
-export const Info = styled.div`
-  font-family: "Lucida Console", "Courier New", monospace;
-  font-size: 25px;
-  padding: 50px;
-  margin: 300px;
-  margin-top: 50px;
-  color: purple;
-  background-color: #A5FC7A;
-  border: solid green;
-`
 
-export const Img = styled.img`
-  height:150px;
+export const Input = styled.input`
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
 `
