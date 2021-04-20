@@ -23,6 +23,7 @@ const LoginPage = () => {
         .get("https://pokedex20201.herokuapp.com/users/" + username)
         .then(() => {
           localStorage.setItem("user", username);
+
           history.push({
             pathname: '/1',
             state: { username: user }
@@ -68,7 +69,9 @@ const LoginPage = () => {
     setType(type === "login" ? "signup" : "login");
   };
 
+
   // Função que controla o submit do form entre auteticação e criação de
+
   // usuário.
   const handleSubmit = (event, user) => {
     event.preventDefault();
