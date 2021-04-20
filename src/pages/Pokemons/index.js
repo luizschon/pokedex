@@ -32,10 +32,13 @@ const Pokemons = () => {
   }
 
   //Atualiza os pokemons mostrados quando a página muda
-  //Atualiza a página mostrada no input quando a página muda
+  //Atualiza a lista de favoritos quando a página muda
+  //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
     getPokemon(id);
+    getFavorites(state.username);
     setPage(id)
+    setOriginalPage(id)
   }, [id])
 
   //Volta para a página anterior se a página atual nao for a primeira
@@ -76,12 +79,6 @@ const Pokemons = () => {
         setIds(result.data.pokemons.map(item => item.id))
       })
   }
-
-  //Atualiza a lista de favoritos quando a página muda
-  useEffect(() => {
-    getFavorites(state.username);
-  }, [id])
-
 
   //Adiciona o pokemon favoritado à API
   //Adiciona as informações do pokemon à lista de favoritos
