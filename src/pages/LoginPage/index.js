@@ -1,7 +1,7 @@
 import axios from "axios";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import SearchBar from "../../components/SearchBar"
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import SearchBar from "../../components/SearchBar/SearchBar"
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -79,7 +79,6 @@ const LoginPage = () => {
 
   return (
     <div>
-      <SearchBar />
       <form onSubmit={(event) => handleSubmit(event, user)}>
         {type === "login" ? (
           <>
