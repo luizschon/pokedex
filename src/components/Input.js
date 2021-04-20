@@ -1,10 +1,9 @@
-const Input = ({ title, changeInput }) => {
+const Input = ({ placeholder, changeInput }) => {
 
   return (
     <div>
-      <p>{title}</p>
       <input
-        placeholder="Username"
+        placeholder={placeholder}
         onChange={(event) => changeInput(event)}
       ></input>
     </div>
