@@ -15,6 +15,13 @@ export const PageButton = styled.button`
   margin-right: 50px;
 `
 
+export const FavButton = styled.button`
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: MediumSeaGreen;
+  color: purple;
+  padding: 5px;
+`
+
 export const Grid = styled.div`
   font-family: "Lucida Console", "Courier New", monospace;
   display: inline-block;

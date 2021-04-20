@@ -30,7 +30,7 @@ export const InfoPage = styled.div`
   border: solid green;
 `
 
-export const InfoButton = styled.button`
+export const FavButton = styled.button`
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: MediumSeaGreen;
   color: purple;
