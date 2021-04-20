@@ -5,8 +5,8 @@ import Favorites from "./pages/Favorites/index";
 import LoginPage from "./pages/LoginPage/index";
 import PokemonInfo from './pages/PokemonInfo/index';
 
-export default function App() {
 
+export default function App() {
   return (
       <BrowserRouter>
         <Switch>

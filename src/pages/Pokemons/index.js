@@ -7,6 +7,7 @@ import axios from "axios";
 import PokemonInfo from "../../pages/PokemonInfo/index";
 
 const Pokemons = () => {
+  let { pageNumber } = useParams();
 
   //Define state.username como o nome do usuário
   const { state } = useLocation();
@@ -14,13 +15,7 @@ const Pokemons = () => {
   let history = useHistory();
   //Armazena a rota da url atual em id
   let { id } = useParams();
-
-  const [pokemons, setPokemons] = useState([]);
-  const [page,setPage] = useState("1");
-  const [favorites,setFavorites] = useState([]);
-  const [ids,setIds] = useState([]);
-  const input = useRef();
-
+  
   //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
     setPokemons([])
@@ -32,8 +27,8 @@ const Pokemons = () => {
 
   //Atualiza os pokemons mostrados quando a página muda
   useEffect(() => {
-    getPokemon(id);
-  }, [id])
+    getPokemon(pageNumber);
+  }, [pageNumber]);
 
   //Volta para a página anterior se a página atual nao for a primeira
   const handlePreviousPage = (id) => {
@@ -142,4 +137,5 @@ const Pokemons = () => {
   );
 }
 
-export default Pokemons
+
+export default Pokemons;
