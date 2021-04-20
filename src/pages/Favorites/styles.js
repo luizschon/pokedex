@@ -22,6 +22,17 @@ export const FavButton = styled.button`
   padding: 5px;
 `
 
+export const Span = styled.span`
+  display: flex;
+  justify-content: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: #A5FC7A;
+  color: purple;
+  margin-left: 400px;
+  margin-right: 400px;
+  padding: 50px;
+`
+
 export const Grid = styled.div`
   font-family: "Lucida Console", "Courier New", monospace;
   display: inline-block;
