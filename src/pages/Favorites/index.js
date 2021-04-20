@@ -13,12 +13,11 @@ const Favorites = () => {
       
       {state.favorites.map(item =>
       <Styled.Grid key={item.id}>
-        <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
+        <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
+          <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
+        </Link>
         <Styled.Item><span>{item.number}</span></Styled.Item>
         <Styled.Item><span>{item.name}</span></Styled.Item>
-        <br/>
-        <Styled.Item><Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
-        <Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
         <br/>
       </Styled.Grid>)
       }

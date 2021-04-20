@@ -20,7 +20,6 @@ const Pokemons = () => {
   const [page,setPage] = useState(originalPage);
   const [favorites,setFavorites] = useState([]);
   const [ids,setIds] = useState([]);
-  const input = useRef();
 
   //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
@@ -126,15 +125,13 @@ const Pokemons = () => {
 
         {pokemons.map(item =>
           <Styled.Grid key={item.id}>
-            <div>
-            <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
-            </div>
+            <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
+              <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
+            </Link>
             <Styled.Item><span>{item.number}</span></Styled.Item>
             <Styled.Item><span>{item.name}</span></Styled.Item>
             <br/>
-            <Styled.Item><Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
-            <Styled.InfoButton>Info</Styled.InfoButton></Link></Styled.Item>
-            <Styled.Item><button onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)}>Favorite</button></Styled.Item>
+            <Styled.Item><Styled.FavButton onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)}>{ids.includes(item.id) ? "Remove Favorite":"Favorite"}</Styled.FavButton></Styled.Item>
             <br/>
           </Styled.Grid>)
           }     
