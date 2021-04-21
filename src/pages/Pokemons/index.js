@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom';
 
 import * as api from '../../api'
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import { UserContext } from '../../context/UserContext'
 import { FavoritesContext } from '../../context/FavoritesContext'
 import * as Styled from './styles';
@@ -19,7 +20,6 @@ const Pokemons = () => {
   const [pokemons, setPokemons] = useState([]);
   const [originalPage, setOriginalPage] = useState("1");
   const [page, setPage] = useState(originalPage);
-  const [ids, setIds] = useState([]);
 
   //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
@@ -27,7 +27,7 @@ const Pokemons = () => {
     // !! TODO mudar isso ^^^
     api.getAllPokemons(id)
       .then(result => {
-        setPokemons(result.data.data.map(item => item))
+        setPokemons(result.data.data)
       });
   }
 
@@ -64,31 +64,8 @@ const Pokemons = () => {
   const getFavorites = (username) => {
     api.getFavorites(username)
       .then((result) => {
-        setFavorites(result.data.pokemons.map(item => item))
-        setIds(result.data.pokemons.map(item => item.id))
+        setFavorites(result.data.pokemons)
       })
-  }
-
-  //Adiciona o pokemon favoritado à API
-  //Adiciona as informações do pokemon à lista de favoritos
-  //Adiciona o id do pokemon à lista de ids dos pokemons favoritos
-  const addFavorite = (username, item) => {
-    api.addFavorite(username, item.name)
-      .then((result) => {
-        setFavorites([...favorites, item]);
-        setIds([...ids,item.id])
-      })
-  }
-
-  //Remove o pokemon favoritado da API
-  //Remove as informações do pokemon da lista de favoritos
-  //Remove o id do pokemon da lista de ids dos pokemons favoritos
-  const removeFavorite = (username, item) => {
-    api.removeFavorite(username, item.name)
-      .then((result) => {
-        setFavorites(favorites.filter((fav) => fav.id !== item.id));
-        setIds(ids.filter((fav) => fav !== item.id));
-      });
   }
 
   //Atualiza os pokemons mostrados quando a página muda
@@ -104,6 +81,18 @@ const Pokemons = () => {
   return (
     <Styled.Div>
       <StyledLink to={{pathname: `/favorites`}}>Favorites</StyledLink>
+        {pokemons ? (
+          pokemons.map(pokemon =>
+            <Styled.Grid key={pokemon.id}>
+              <PokemonCard 
+                pokemon={pokemon} 
+                isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)} 
+              />
+            </Styled.Grid>)
+        ) : (
+          <h1>Carregando!</h1>
+        )
+        }
 
       <Styled.PageButtonsDiv>
         <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
@@ -119,24 +108,7 @@ const Pokemons = () => {
         <Link to={{pathname: `/${handleNextPage(id)}`}}>
           <Styled.PageButton>Next</Styled.PageButton>
         </Link>
-      </Styled.PageButtonsDiv>
-
-        {pokemons.map(item =>
-          <Styled.Grid key={item.id}>
-            <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
-              <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
-            </Link>
-            <Styled.Item><span>{item.number}</span></Styled.Item>
-            <Styled.Item><span>{item.name}</span></Styled.Item>
-            <br/>
-            <Styled.Item>
-              <Styled.FavButton 
-                onClick = {() => ids.includes(item.id) ? removeFavorite(user,item) : addFavorite(user,item)}>
-                  {ids.includes(item.id) ? "Remove Favorite":"Favorite"}</Styled.FavButton>
-              </Styled.Item>
-            <br/>
-          </Styled.Grid>)
-          }     
+      </Styled.PageButtonsDiv> 
       </Styled.Div>
   );
 }
