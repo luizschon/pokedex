@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
+
+import * as api from '../../api'
+import { UserContext } from '../../context/UserContext'
 import * as Styled from './styles';
-import {StyledLink} from './styles';
-import axios from "axios";
+import { StyledLink } from './styles';
 
 const Pokemons = () => {
 
@@ -13,19 +15,21 @@ const Pokemons = () => {
   //Armazena a rota da url atual em id
   let { id } = useParams();
 
+  const [user, ] = useContext(UserContext);
   const [pokemons, setPokemons] = useState([]);
-  const [originalPage,setOriginalPage] = useState("1");
-  const [page,setPage] = useState(originalPage);
-  const [favorites,setFavorites] = useState([]);
-  const [ids,setIds] = useState([]);
+  const [originalPage, setOriginalPage] = useState("1");
+  const [page, setPage] = useState(originalPage);
+  const [favorites, setFavorites] = useState([]);
+  const [ids, setIds] = useState([]);
 
   //Armazena a lista de pokemons da página atual
   const getPokemon = (id) => {
-    setPokemons([])
-    axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + id)
+    setPokemons([]);
+    // !! TODO mudar isso ^^^
+    api.getAllPokemons(id)
       .then(result => {
         setPokemons(result.data.data.map(item => item))
-      })
+      });
   }
 
   //Atualiza os pokemons mostrados quando a página muda
@@ -33,10 +37,10 @@ const Pokemons = () => {
   //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
     getPokemon(id);
-    getFavorites(state.username);
+    getFavorites(user);
     setPage(id)
     setOriginalPage(id)
-  }, [id])
+  }, [id, user])
 
   //Volta para a página anterior se a página atual nao for a primeira
   const handlePreviousPage = (id) => {
@@ -54,13 +58,12 @@ const Pokemons = () => {
     return parseInt(id)+1;
   }
 
-  //Redireciona o usuário para a página desejada usando o input
-  //Se o input nao for válido, retorna o texto para o número da página atual
+  // Redireciona o usuário para a página desejada usando o input
+  // Se o input não for válido, retorna o texto para o número da página atual
   const redirect = (page) => {
     if (page > 0 && page < 34){
       history.push({
         pathname: `/${page}`,
-        state: { username : state.username }
       });
     } else {
       setPage(originalPage)
@@ -70,7 +73,7 @@ const Pokemons = () => {
 
   //Armazena a lista de pokemons favoritos
   const getFavorites = (username) => {
-    axios.get(`https://pokedex20201.herokuapp.com/users/${username}`)
+    api.getFavorites(username)
       .then((result) => {
         setFavorites(result.data.pokemons.map(item => item))
         setIds(result.data.pokemons.map(item => item.id))
@@ -80,25 +83,23 @@ const Pokemons = () => {
   //Adiciona o pokemon favoritado à API
   //Adiciona as informações do pokemon à lista de favoritos
   //Adiciona o id do pokemon à lista de ids dos pokemons favoritos
-  const addFavorite = (username,item) => {
-    axios
-    .post(`https://pokedex20201.herokuapp.com/users/${username}/starred/${item.name}`)
-    .then((result) => {
-      setFavorites([...favorites, item]);
-      setIds([...ids,item.id])
-    })
+  const addFavorite = (username, item) => {
+    api.addFavorite(username, item.name)
+      .then((result) => {
+        setFavorites([...favorites, item]);
+        setIds([...ids,item.id])
+      })
   }
 
   //Remove o pokemon favoritado da API
   //Remove as informações do pokemon da lista de favoritos
   //Remove o id do pokemon da lista de ids dos pokemons favoritos
-  const removeFavorite = (username,item) => {
-    axios
-    .delete(`https://pokedex20201.herokuapp.com/users/${username}/starred/${item.name}`)
-    .then((result) => {
-      setFavorites(favorites.filter((fav) => fav.id !== item.id));
-      setIds(ids.filter((fav) => fav !== item.id));
-    });
+  const removeFavorite = (username, item) => {
+    api.removeFavorite(username, item.name)
+      .then((result) => {
+        setFavorites(favorites.filter((fav) => fav.id !== item.id));
+        setIds(ids.filter((fav) => fav !== item.id));
+      });
   }
 
   return (

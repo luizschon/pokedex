@@ -1,34 +1,32 @@
-import axios from "axios";
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
+import * as api from "../../api"
+import { UserContext } from "../../context/UserContext"
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { UserContext } from "../../context/UserContext"
 
 const LoginPage = () => {
   let history = useHistory();
+  const [, setUser] = useContext(UserContext);
 
-  const [user, setUser] = useState(""); 
-  const [auth, setAuth] = useContext(UserContext);
+  const [input, setInput] = useState(""); 
   const [type, setType] = useState("login");
   const [error, setError] = useState(null);
-  console.log(`auth = ${auth}`)
 
   // Tenta resgatar informação do usuário na API e armazenar em 'localStorage'
   // no item 'user'.
   // Caso a requisição falhe, um erro é atribuído e mensagem de erro é renderizada.
   const authenticateUser = (username) => {
     if (username !== "") {
-      axios
-        .get("https://pokedex20201.herokuapp.com/users/" + username)
+      api.getUser(username)
         .then(() => {
-          setAuth(username);
+          setUser(username);
           localStorage.setItem("PokeUser", username)
 
           history.push({
             pathname: '/1',
-            state: { username: user }
+            state: { username: input }
           });
         })
         .catch((err) => {
@@ -42,12 +40,11 @@ const LoginPage = () => {
   // Caso a requisição falhe, um erro é atribuído e mensagem de erro é renderizada.
   const createUser = (username) => {
     if (username !== "") {
-      axios
-        .post("https://pokedex20201.herokuapp.com/users", {
-          username: username,
-        })
+      api.postUser(username)
         .then(() => {
-          localStorage.setItem("user", username);
+          setUser(username);
+          localStorage.setItem("PokeUser", username);
+          
           history.push({
             pathname: '/1',
             state: { user: username }
@@ -61,7 +58,7 @@ const LoginPage = () => {
 
   // Função que armazena valor digitado pelo usuário.
   const changeInput = (event) => {
-    setUser(event.target.value);
+    setInput(event.target.value);
   };
 
   // Função que muda renderização do form entre 'login' para autenticar usuário
@@ -75,30 +72,30 @@ const LoginPage = () => {
   // Função que controla o submit do form entre auteticação e criação de
 
   // usuário.
-  const handleSubmit = (event, user) => {
+  const handleSubmit = (event, username) => {
     event.preventDefault();
     setError(null);
-    type === "login" ? authenticateUser(user) : createUser(user);
+    type === "login" ? authenticateUser(username) : createUser(username);
   };
 
   return (
     <div>
-      <form onSubmit={(event) => handleSubmit(event, user)}>
+      <form onSubmit={(event) => handleSubmit(event, input)}>
         {type === "login" ? (
           <>
             <h2>Log-in</h2>
             <Input placeholder="Username" changeInput={changeInput} />
-            {error ? <p>Esse usuário não existe!</p> : <></>}
+            {error && <p>Esse usuário não existe!</p>}
             <Button type="submit" title="Entrar" />
-            <Button title="Criar conta" changeForm={changeForm} />
+            <Button title="Não possui uma conta? Cadastre-se" changeForm={changeForm} />
           </>
         ) : (
           <>
             <h2>Sign-up</h2>
             <Input placeholder="Username" changeInput={changeInput} />
-            {error ? <p>Esse usuário já está cadastrado!</p> : <></>}
+            {error && <p>Esse usuário já está cadastrado!</p>}
             <Button type="submit" title="Criar conta" />
-            <Button title="Login na conta" changeForm={changeForm} />
+              <Button title="Já possui uma conta? Acesse" changeForm={changeForm} />
           </>
         )}
       </form>
