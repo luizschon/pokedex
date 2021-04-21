@@ -12,7 +12,7 @@ const Favorites = () => {
       <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>    
       {favorites.map(item =>
       <Styled.Grid key={item.id}>
-        <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
+        <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemon: item }}}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
         </Link>
         <Styled.Item><span>{item.number}</span></Styled.Item>
