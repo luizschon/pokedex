@@ -1,16 +1,19 @@
 import axios from "axios";
+import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import SearchBar from "../../components/SearchBar/SearchBar"
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { UserContext } from "../../context/UserContext"
 
 const LoginPage = () => {
   let history = useHistory();
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(""); 
+  const [auth, setAuth] = useContext(UserContext);
   const [type, setType] = useState("login");
   const [error, setError] = useState(null);
+  console.log(`auth = ${auth}`)
 
   // Tenta resgatar informação do usuário na API e armazenar em 'localStorage'
   // no item 'user'.
@@ -20,7 +23,8 @@ const LoginPage = () => {
       axios
         .get("https://pokedex20201.herokuapp.com/users/" + username)
         .then(() => {
-          localStorage.setItem("user", username);
+          setAuth(username);
+          localStorage.setItem("user", username)
 
           history.push({
             pathname: '/1',
