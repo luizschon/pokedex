@@ -18,7 +18,9 @@ const SearchBar = () => {
       .then((res) => {
         console.log(res.data)
         history.push(`/pokemons/${res.data.name}`)
-      })
+      }).catch(
+        // !! => TODO!
+      )
     }
   }
 
