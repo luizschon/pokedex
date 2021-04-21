@@ -24,7 +24,7 @@ const LoginPage = () => {
         .get("https://pokedex20201.herokuapp.com/users/" + username)
         .then(() => {
           setAuth(username);
-          localStorage.setItem("user", username)
+          localStorage.setItem("PokeUser", username)
 
           history.push({
             pathname: '/1',

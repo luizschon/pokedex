@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react'
 
-const storedUser = localStorage.getItem('user');
+const storedUser = localStorage.getItem('PokeUser');
 
 export const UserContext = createContext([storedUser, () => {}]);
 
