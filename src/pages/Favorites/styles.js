@@ -22,14 +22,11 @@ export const FavButton = styled.button`
   padding: 5px;
 `
 
-export const Span = styled.span`
+export const Text = styled.h2`
   display: flex;
   justify-content: center;
   font-family: "Lucida Console", "Courier New", monospace;
-  background-color: #A5FC7A;
   color: purple;
-  margin-left: 400px;
-  margin-right: 400px;
   padding: 50px;
 `
 

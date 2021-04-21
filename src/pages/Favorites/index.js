@@ -10,7 +10,8 @@ const Favorites = () => {
   return(
     <Styled.Div>
       <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>    
-      {favorites.map(item =>
+      {favorites.length > 0 ?
+      favorites.map(item =>
       <Styled.Grid key={item.id}>
         <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemon: item }}}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
@@ -19,7 +20,8 @@ const Favorites = () => {
         <Styled.Item><span>{item.name}</span></Styled.Item>
         <br/>
       </Styled.Grid>)
-      }
+      :
+      <Styled.Text>Nao há nenhum pokemon favoritado</Styled.Text>}
     </Styled.Div>
   );
 }
