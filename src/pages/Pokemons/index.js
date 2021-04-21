@@ -1,25 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 
 import * as api from '../../api'
 import { UserContext } from '../../context/UserContext'
+import { FavoritesContext } from '../../context/FavoritesContext'
 import * as Styled from './styles';
 import { StyledLink } from './styles';
 
 const Pokemons = () => {
-
-  //Define state.username como o nome do usuário
-  const { state } = useLocation();
-
+  
   let history = useHistory();
   //Armazena a rota da url atual em id
   let { id } = useParams();
 
   const [user, ] = useContext(UserContext);
+  const [favorites, setFavorites] = useContext(FavoritesContext);
+
   const [pokemons, setPokemons] = useState([]);
   const [originalPage, setOriginalPage] = useState("1");
   const [page, setPage] = useState(originalPage);
-  const [favorites, setFavorites] = useState([]);
   const [ids, setIds] = useState([]);
 
   //Armazena a lista de pokemons da página atual
@@ -31,16 +30,6 @@ const Pokemons = () => {
         setPokemons(result.data.data.map(item => item))
       });
   }
-
-  //Atualiza os pokemons mostrados quando a página muda
-  //Atualiza a lista de favoritos quando a página muda
-  //Atualiza a página atual e a página mostrada no input quando a página muda
-  useEffect(() => {
-    getPokemon(id);
-    getFavorites(user);
-    setPage(id)
-    setOriginalPage(id)
-  }, [id, user])
 
   //Volta para a página anterior se a página atual nao for a primeira
   const handlePreviousPage = (id) => {
@@ -102,12 +91,22 @@ const Pokemons = () => {
       });
   }
 
+  //Atualiza os pokemons mostrados quando a página muda
+  //Atualiza a lista de favoritos quando a página muda
+  //Atualiza a página atual e a página mostrada no input quando a página muda
+  useEffect(() => {
+    getPokemon(id);
+    getFavorites(user);
+    setPage(id)
+    setOriginalPage(id)
+  }, [id, user])
+
   return (
     <Styled.Div>
-      <StyledLink to={{pathname: `/favorites`,state: { favorites: favorites }}}>Favorites</StyledLink>
+      <StyledLink to={{pathname: `/favorites`}}>Favorites</StyledLink>
 
       <Styled.PageButtonsDiv>
-        <Link to={{pathname: `/${handlePreviousPage(id)}`,state: { username : state.username }}}>
+        <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
           <Styled.PageButton>Previous</Styled.PageButton>
         </Link>
         <Styled.Input
@@ -117,7 +116,7 @@ const Pokemons = () => {
           onChange={(event) => setPage(event.target.value)}
           onKeyPress={(event) => event.key === "Enter" && redirect(page)}
         />
-        <Link to={{pathname: `/${handleNextPage(id)}`,state: { username : state.username }}}>
+        <Link to={{pathname: `/${handleNextPage(id)}`}}>
           <Styled.PageButton>Next</Styled.PageButton>
         </Link>
       </Styled.PageButtonsDiv>
@@ -130,7 +129,11 @@ const Pokemons = () => {
             <Styled.Item><span>{item.number}</span></Styled.Item>
             <Styled.Item><span>{item.name}</span></Styled.Item>
             <br/>
-            <Styled.Item><Styled.FavButton onClick = {() => ids.includes(item.id) ? removeFavorite(state.username,item) : addFavorite(state.username,item)}>{ids.includes(item.id) ? "Remove Favorite":"Favorite"}</Styled.FavButton></Styled.Item>
+            <Styled.Item>
+              <Styled.FavButton 
+                onClick = {() => ids.includes(item.id) ? removeFavorite(user,item) : addFavorite(user,item)}>
+                  {ids.includes(item.id) ? "Remove Favorite":"Favorite"}</Styled.FavButton>
+              </Styled.Item>
             <br/>
           </Styled.Grid>)
           }     

@@ -1,14 +1,16 @@
-import { Link, useLocation} from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+
+import { FavoritesContext } from '../../context/FavoritesContext'
 import * as Styled from "./styles";
 
 const Favorites = () => {
-  //Define state.favorites como uma lista contendo as informações dos pokemons favoritos
-  const { state } = useLocation();
+  const [favorites, ] = useContext(FavoritesContext);
 
   return(
     <Styled.Div>
       <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>    
-      {state.favorites.map(item =>
+      {favorites.map(item =>
       <Styled.Grid key={item.id}>
         <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemoninfo: item }}}>
           <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
