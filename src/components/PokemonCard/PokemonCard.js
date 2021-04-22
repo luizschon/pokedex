@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import * as api from '../../api'
@@ -38,11 +38,12 @@ const PokemonCard = ({ pokemon, isFavorite }) => {
       <Styled.Item><span>{pokemon.number}</span></Styled.Item>
       <Styled.Item><span>{pokemon.name}</span></Styled.Item>
       <Styled.Item>
-        <Styled.FavButton
-          onClick={() => { 
-            isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
+      {user && (
+        <Styled.FavButton onClick={() => {isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
           {isFavorite ? "Remove Favorite" : "Favorite"}
         </Styled.FavButton>
+      )}
+        
       </Styled.Item>
     </div>
   )

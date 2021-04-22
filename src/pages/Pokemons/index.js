@@ -6,7 +6,6 @@ import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import { UserContext } from '../../context/UserContext'
 import { FavoritesContext } from '../../context/FavoritesContext'
 import * as Styled from './styles';
-import { StyledLink } from './styles';
 
 const Pokemons = () => {
   
@@ -65,7 +64,7 @@ const Pokemons = () => {
     api.getFavorites(username)
       .then((result) => {
         setFavorites(result.data.pokemons)
-      })
+      }) 
   }
 
   //Atualiza os pokemons mostrados quando a página muda
@@ -73,14 +72,16 @@ const Pokemons = () => {
   //Atualiza a página atual e a página mostrada no input quando a página muda
   useEffect(() => {
     getPokemon(id);
-    getFavorites(user);
     setPage(id)
-    setOriginalPage(id)
+    setOriginalPage(id);
+    if (user !== null) {
+      getFavorites(user);
+    }
+    
   }, [id, user])
 
   return (
     <Styled.Div>
-      <StyledLink to={{pathname: `/favorites`}}>Favorites</StyledLink>
         {pokemons ? (
           pokemons.map(pokemon =>
             <Styled.Grid key={pokemon.id}>
