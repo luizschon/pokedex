@@ -8,6 +8,8 @@ import { UserProvider } from './context/UserContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Header from './components/Header/Header';
 
+document.body.style.background = "beige"
+
 export default function App() {
   return (
     <UserProvider>

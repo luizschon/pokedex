@@ -11,7 +11,6 @@ export const Grid = styled.div`
 export const Div = styled.div`
   justify-content: center;
   padding: 30px;
-  background-color: beige;
 `
 
 export const Item = styled.div`
