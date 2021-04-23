@@ -8,8 +8,6 @@ export const Item = styled.div`
 export const InfoPage = styled.div`
   font-family: "Lucida Console", "Courier New", monospace;
   font-size: 25px;
-  padding: 50px;
-  margin: 300px;
   margin-top: 50px;
   color: black;
 `

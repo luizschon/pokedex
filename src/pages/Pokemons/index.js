@@ -1,20 +1,25 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { CgChevronLeft, CgChevronRight } from 'react-icons/cg'
-import * as api from '../../api'
-import PokemonCard from "../../components/PokemonCard/PokemonCard";
-import { UserContext } from '../../context/UserContext'
-import { FavoritesContext } from '../../context/FavoritesContext'
+
+import * as api from '../../api';
 import * as Styled from './styles';
+import { ModalContext } from "../../context/ModalContext";
+import { UserContext } from '../../context/UserContext';
+import { FavoritesContext } from '../../context/FavoritesContext';
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
+import Modal from "../../components/Modal/Modal";
+import PokemonInfo from '../../components/PokemonInfo/PokemonInfo';
+import Login from '../../components/Login/Login';
 
 const Pokemons = () => {
-  
   let history = useHistory();
   //Armazena a rota da url atual em id
   let { id } = useParams();
 
   const [user, ] = useContext(UserContext);
   const [favorites, setFavorites] = useContext(FavoritesContext);
+  const [modal, , closeModal] = useContext(ModalContext)
 
   const [pokemons, setPokemons] = useState([]);
   const [originalPage, setOriginalPage] = useState("1");
@@ -70,6 +75,7 @@ const Pokemons = () => {
   //Atualiza os pokemons mostrados quando a página muda
   //Atualiza a lista de favoritos quando a página muda
   //Atualiza a página atual e a página mostrada no input quando a página muda
+
   useEffect(() => {
     getPokemon(id);
     setPage(id)
@@ -77,40 +83,54 @@ const Pokemons = () => {
     if (user !== null) {
       getFavorites(user);
     }
-    
   }, [id, user])
 
   return (
-    <Styled.Div>
-        {pokemons ? (
-          pokemons.map(pokemon =>
-            <Styled.Grid key={pokemon.id}>
-              <PokemonCard 
-                pokemon={pokemon} 
-                isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)} 
-              />
-            </Styled.Grid>)
-        ) : (
-          <h1>Carregando!</h1>
-        )
-        }
-
-      <Styled.PageButtonsDiv>
-        <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
-          <CgChevronLeft size="2rem" color="black" />
-        </Link>
-        <Styled.Input
-          type="text"
-          maxLength="2"
-          value={page}
-          onChange={(event) => setPage(event.target.value)}
-          onKeyPress={(event) => event.key === "Enter" && redirect(page)}
-        />
-        <Link to={{pathname: `/${handleNextPage(id)}`}}>
-          <CgChevronRight size="2rem" color="black" />
-        </Link>
-      </Styled.PageButtonsDiv> 
-      </Styled.Div>
+      <Styled.Div>
+      {pokemons ? (
+            pokemons.map(pokemon =>
+              <Styled.Grid key={pokemon.id}>
+                <PokemonCard 
+                  pokemon={pokemon} 
+                  isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)}
+                  />
+              </Styled.Grid>)
+          ) : (
+            <h1>Carregando!</h1>
+            )
+          }
+          
+          {/* Caso o valor de modal seja um objeto não-nulo, interpreta 
+           /* como se fosse o objeto do Pokémon que foi clicado e
+           /* apresenta modal do Pokémon clicado */}
+          {typeof modal === 'object' && modal !== null && (
+            <Modal closeModal={() => closeModal()}>
+              <PokemonInfo pokemon={modal} />
+            </Modal>
+          )}
+          {/* Caso o valor de modal seja "login", aprensenta modal de Login*/}  
+          {modal === "login" && (
+            <Modal closeModal={() => closeModal()}>
+              <Login onSuccess={() => closeModal()} />
+            </Modal>
+          )}
+  
+        <Styled.PageButtonsDiv>
+          <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
+            <CgChevronLeft size="2rem" color="black" />
+          </Link>
+          <Styled.Input
+            type="text"
+            maxLength="2"
+            value={page}
+            onChange={(event) => setPage(event.target.value)}
+            onKeyPress={(event) => event.key === "Enter" && redirect(page)}
+          />
+          <Link to={{pathname: `/${handleNextPage(id)}`}}>
+            <CgChevronRight size="2rem" color="black" />
+          </Link>
+        </Styled.PageButtonsDiv> 
+        </Styled.Div>   
   );
 }
 

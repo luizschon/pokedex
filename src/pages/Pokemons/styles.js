@@ -10,7 +10,6 @@ export const Grid = styled.div`
 
 export const Div = styled.div`
   justify-content: center;
-  padding: 30px;
 `
 
 export const Item = styled.div`

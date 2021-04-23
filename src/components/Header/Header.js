@@ -1,13 +1,15 @@
-import { useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { CgPokemon } from 'react-icons/cg'
-import { FaSignInAlt, FaSignOutAlt, FaStar, FaHome } from 'react-icons/fa'
+import { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { CgPokemon } from 'react-icons/cg';
+import { FaSignInAlt, FaSignOutAlt, FaStar, FaHome } from 'react-icons/fa';
 
-import { UserContext } from '../../context/UserContext'
-import * as Styled from './styles'
+import { UserContext } from '../../context/UserContext';
+import { ModalContext } from '../../context/ModalContext';
+import * as Styled from './styles';
 
 const Header = () => {
   const [user, setUser] = useContext(UserContext)
+  const [, setModal] = useContext(ModalContext)
   const location = useLocation();
 
   return (
@@ -39,13 +41,13 @@ const Header = () => {
         </Link>   
         </>
       ) : (
-        <Link to="/login">
-          <FaSignInAlt size="2rem" color="black" />
-        </Link>
+        <div className="sign-button" onClick={() => setModal("login")}>
+          <FaSignInAlt size="2rem" color="black" cursor="pointer" />
+        </div>
       ) }
       </Styled.RightItems>
     </Styled.Header>
   )
-}
+};
 
-export default Header
+export default Header;
