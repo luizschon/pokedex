@@ -23,11 +23,7 @@ const LoginPage = () => {
         .then(() => {
           setUser(username);
           localStorage.setItem("PokeUser", username)
-
-          history.push({
-            pathname: '/1',
-            state: { username: input }
-          });
+          history.push("/");
         })
         .catch((err) => {
           setError(err);
@@ -44,11 +40,7 @@ const LoginPage = () => {
         .then(() => {
           setUser(username);
           localStorage.setItem("PokeUser", username);
-          
-          history.push({
-            pathname: '/1',
-            state: { user: username }
-          })
+          history.push("/");
         })
         .catch((err) => {
           setError(err);
