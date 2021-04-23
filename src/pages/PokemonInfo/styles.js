@@ -11,18 +11,7 @@ export const InfoPage = styled.div`
   padding: 50px;
   margin: 300px;
   margin-top: 50px;
-  color: purple;
-  background-color: #A5FC7A;
-  border: solid green;
-`
-
-export const PageButton = styled.button`
-  font-family: "Lucida Console", "Courier New", monospace;
-  background-color: MediumSeaGreen;
-  color: purple;
-  padding: 8px;
-  margin-left: 50px;
-  margin-right: 50px;
+  color: black;
 `
 
 export const PageButtonsDiv= styled.div`
