@@ -1,8 +1,9 @@
 import { createContext, useState } from 'react'
 
 // Armazena valor do item PokeUser do localStorage, 
-// correspondente ao nome do usuário
-const storedUser = localStorage.getItem('PokeUser');
+// correspondente ao nome do usuário, caso seja não-nulo
+let storedUser;
+storedUser && localStorage.getItem('PokeUser') ;
 
 // Cria context para usuário, com valor inicial storedUser
 export const UserContext = createContext([storedUser, () => {}]);
