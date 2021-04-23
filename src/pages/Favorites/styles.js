@@ -6,22 +6,6 @@ export const Div = styled.div`
   background-color: beige;
 `
 
-export const PageButton = styled.button`
-  font-family: "Lucida Console", "Courier New", monospace;
-  background-color: MediumSeaGreen;
-  color: purple;
-  padding: 8px;
-  margin-left: 50px;
-  margin-right: 50px;
-`
-
-export const FavButton = styled.button`
-  font-family: "Lucida Console", "Courier New", monospace;
-  background-color: MediumSeaGreen;
-  color: purple;
-  padding: 5px;
-`
-
 export const Text = styled.h2`
   display: flex;
   justify-content: center;

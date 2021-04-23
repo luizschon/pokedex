@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { FavoritesContext } from '../../context/FavoritesContext'
 import * as Styled from "./styles";
 
@@ -9,7 +9,7 @@ const Favorites = () => {
 
   return(
     <Styled.Div>
-      <Styled.PageButton onClick = {() => window.history.back()}>Back to Pokemons</Styled.PageButton>    
+      <AiOutlineArrowLeft size="2rem" color="black" onClick = {() => window.history.back()} />    
       {favorites.length > 0 ?
       favorites.map(item =>
       <Styled.Grid key={item.id}>
