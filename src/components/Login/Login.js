@@ -1,13 +1,11 @@
 import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 
 import * as api from "../../api"
 import { UserContext } from "../../context/UserContext"
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
+import Input from "../Input/Input";
+import Button from "../Button/Button";
 
-const LoginPage = () => {
-  let history = useHistory();
+const LoginPage = ({ onSuccess }) => {
   const [, setUser] = useContext(UserContext);
 
   const [input, setInput] = useState(""); 
@@ -23,7 +21,7 @@ const LoginPage = () => {
         .then(() => {
           setUser(username);
           localStorage.setItem("PokeUser", username)
-          history.push("/");
+          onSuccess();
         })
         .catch((err) => {
           setError(err);
@@ -40,7 +38,7 @@ const LoginPage = () => {
         .then(() => {
           setUser(username);
           localStorage.setItem("PokeUser", username);
-          history.push("/");
+          onSuccess();
         })
         .catch((err) => {
           setError(err);

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
+  position: sticky;
+  top: 0;
   height: 50px;
   display: flex;
   justify-content: space-between;

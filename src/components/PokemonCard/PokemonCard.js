@@ -1,13 +1,15 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import * as api from '../../api'
-import { FavoritesContext } from '../../context/FavoritesContext'
-import { UserContext } from '../../context/UserContext';
-import * as Styled from '../../pages/Pokemons/styles'
 
-const PokemonCard = ({ pokemon, isFavorite }) => {
+import * as api from '../../api';
+import { UserContext } from '../../context/UserContext';
+import { FavoritesContext } from '../../context/FavoritesContext';
+import { ModalContext } from '../../context/ModalContext';
+import * as Styled from '../../pages/Pokemons/styles';
+
+const PokemonCard = ({ pokemon, isFavorite, showPopUp }) => {
   const [user, ] = useContext(UserContext);
+  const [, setModal] = useContext(ModalContext)
   const [favorites, setFavorites] = useContext(FavoritesContext);
 
   //Adiciona o pokemon favoritado à API
@@ -32,18 +34,16 @@ const PokemonCard = ({ pokemon, isFavorite }) => {
 
   return (
     <div>
-      <Link to={{ pathname: `/pokemons/${pokemon.name}`, state: {pokemon} }}>
-        <Styled.Item><img src={pokemon.image_url} alt={pokemon.name} /></Styled.Item>
-      </Link>
+      <Styled.Item><img src={pokemon.image_url} alt={pokemon.name} onClick={() => setModal(pokemon)}/></Styled.Item>
       <Styled.Item><span>{pokemon.number}</span></Styled.Item>
       <Styled.Item><span>{pokemon.name}</span></Styled.Item>
+      
       <Styled.Item>
-      {user && (
-        <Styled.FavButton onClick={() => {isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
-          {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
-        </Styled.FavButton>
-      )}
-        
+        {user && (
+          <Styled.FavButton onClick={() => {isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
+            {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
+          </Styled.FavButton>
+        )}  
       </Styled.Item>
     </div>
   )
