@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import * as api from '../../api'
 import { FavoritesContext } from '../../context/FavoritesContext'
 import { UserContext } from '../../context/UserContext';
@@ -40,7 +40,7 @@ const PokemonCard = ({ pokemon, isFavorite }) => {
       <Styled.Item>
       {user && (
         <Styled.FavButton onClick={() => {isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
-          {isFavorite ? "Remove Favorite" : "Favorite"}
+          {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
         </Styled.FavButton>
       )}
         

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom';
-
+import { CgChevronLeft, CgChevronRight } from 'react-icons/cg'
 import * as api from '../../api'
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import { UserContext } from '../../context/UserContext'
@@ -97,7 +97,7 @@ const Pokemons = () => {
 
       <Styled.PageButtonsDiv>
         <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
-          <Styled.PageButton>Previous</Styled.PageButton>
+          <CgChevronLeft size="2rem" color="black" />
         </Link>
         <Styled.Input
           type="text"
@@ -107,7 +107,7 @@ const Pokemons = () => {
           onKeyPress={(event) => event.key === "Enter" && redirect(page)}
         />
         <Link to={{pathname: `/${handleNextPage(id)}`}}>
-          <Styled.PageButton>Next</Styled.PageButton>
+          <CgChevronRight size="2rem" color="black" />
         </Link>
       </Styled.PageButtonsDiv> 
       </Styled.Div>

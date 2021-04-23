@@ -30,10 +30,8 @@ export const InfoPage = styled.div`
 `
 
 export const FavButton = styled.button`
-  font-family: "Lucida Console", "Courier New", monospace;
-  background-color: MediumSeaGreen;
-  color: purple;
-  padding: 5px;
+  background-color: beige;
+  border: none;
 `
 
 export const PageButton = styled.button`
