@@ -11,6 +11,7 @@ import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import Modal from "../../components/Modal/Modal";
 import PokemonInfo from '../../components/PokemonInfo/PokemonInfo';
 import Login from '../../components/Login/Login';
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Pokemons = () => {
   let history = useHistory();
@@ -88,6 +89,7 @@ const Pokemons = () => {
 
   return (
       <Styled.Div>
+        <SearchBar />
       {pokemons ? (
             pokemons.map(pokemon =>
               <Styled.Grid key={pokemon.id}>
