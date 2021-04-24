@@ -13,6 +13,7 @@ export const Curtain = styled.div`
 `
 
 export const PopUp = styled.div`
+  background-color: white;
   height: 80%;
   width: 60%;
 `
