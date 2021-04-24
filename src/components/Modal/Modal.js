@@ -1,12 +1,13 @@
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 import * as Styled from './styles'
+import ColorByType from "../../components/PokemonInfo/ColorByType"
 
-const Modal = ({ children , closeModal }) => {
+const Modal = ({ pokemon, children, closeModal }) => {
   return (
     <Styled.Curtain>
-      <Styled.PopUp>
-        <AiOutlineArrowLeft size="2rem" color="black" onClick={closeModal} />
+      <Styled.PopUp style={pokemon ? { backgroundColor: ColorByType(pokemon.kind) } : {}}>
+        <AiOutlineClose size="2rem" color="black" style={{ marginLeft: 20, marginTop: 20 }} onClick={closeModal} />
         { children }
       </Styled.PopUp>
     </Styled.Curtain>

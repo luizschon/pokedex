@@ -24,6 +24,7 @@ const PokemonInfo = ({ pokemon }) => {
         <Styled.Item><strong>Height: {pokemon.height} kg</strong></Styled.Item>
         <br />
         <Styled.Item><strong>Kind: {handleType(pokemon.kind)}</strong></Styled.Item>
+        <br />
       </Styled.InfoPage>
     </div>
   );
