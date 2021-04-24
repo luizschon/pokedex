@@ -7,7 +7,7 @@ import { FavoritesContext } from '../../context/FavoritesContext';
 import { ModalContext } from '../../context/ModalContext';
 import * as Styled from '../../pages/Pokemons/styles';
 
-const PokemonCard = ({ pokemon, isFavorite, showPopUp }) => {
+const PokemonCard = ({ pokemon, isFavorite }) => {
   const [user, ] = useContext(UserContext);
   const [, setModal] = useContext(ModalContext)
   const [favorites, setFavorites] = useContext(FavoritesContext);

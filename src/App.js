@@ -11,9 +11,9 @@ document.body.style.background = "beige"
 
 export default function App() {
   return (
-    <ModalProvider>
-      <UserProvider>
-        <FavoritesProvider>
+    <UserProvider>
+      <FavoritesProvider>
+        <ModalProvider>
           <BrowserRouter>
             <Header />
             <Switch>    
@@ -22,8 +22,8 @@ export default function App() {
               <Route path="/pokedex/:id" children={<Pokemons />}/>
             </Switch>
           </BrowserRouter>
-        </FavoritesProvider>
-      </UserProvider>
-    </ModalProvider>
+        </ModalProvider>
+      </FavoritesProvider>
+    </UserProvider>
   );
 }

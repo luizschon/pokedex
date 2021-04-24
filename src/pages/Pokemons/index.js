@@ -65,8 +65,8 @@ const Pokemons = () => {
   }
 
   //Armazena a lista de pokemons favoritos
-  const getFavorites = (username) => {
-    api.getFavorites(username)
+  const getFavorites = () => {
+    api.getFavorites(user)
       .then((result) => {
         setFavorites(result.data.pokemons)
       }) 
@@ -81,9 +81,10 @@ const Pokemons = () => {
     setPage(id)
     setOriginalPage(id);
     if (user !== null) {
-      getFavorites(user);
+      getFavorites()
     }
   }, [id, user])
+
 
   return (
       <Styled.Div>
@@ -93,7 +94,7 @@ const Pokemons = () => {
                 <PokemonCard 
                   pokemon={pokemon} 
                   isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)}
-                  />
+                />
               </Styled.Grid>)
           ) : (
             <h1>Carregando!</h1>

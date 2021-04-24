@@ -1,7 +1,8 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
+
 import * as Styled from './styles'
 
-const Modal = ({ children, closeModal }) => {
+const Modal = ({ children , closeModal }) => {
   return (
     <Styled.Curtain>
       <Styled.PopUp>

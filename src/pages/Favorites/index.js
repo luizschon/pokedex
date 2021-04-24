@@ -1,27 +1,41 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { FavoritesContext } from '../../context/FavoritesContext'
+
+import { FavoritesContext } from '../../context/FavoritesContext';
+import { ModalContext } from '../../context/ModalContext';
+import PokemonCard from '../../components/PokemonCard/PokemonCard';
+import Modal from '../../components/Modal/Modal';
+import PokemonInfo from '../../components/PokemonInfo/PokemonInfo';
 import * as Styled from "./styles";
 
 const Favorites = () => {
   const [favorites, ] = useContext(FavoritesContext);
+  const [modal, , closeModal] = useContext(ModalContext);
 
   return(
+    <>
     <Styled.Div>    
       {favorites.length > 0 ?
-      favorites.map(item =>
-      <Styled.Grid key={item.id}>
-        <Link to={{pathname: `/pokemons/${item.name}`,state: { pokemon: item }}}>
-          <Styled.Item><img src={item.image_url} alt={item.name}/></Styled.Item>
-        </Link>
-        <Styled.Item><span>{item.number}</span></Styled.Item>
-        <Styled.Item><span>{item.name}</span></Styled.Item>
-        <br/>
+      favorites.map(pokemon =>
+      <Styled.Grid key={pokemon.id}>
+        <PokemonCard 
+          pokemon={pokemon} 
+          isFavorite={true} 
+        />
       </Styled.Grid>)
       :
       <Styled.Text>Nao há nenhum pokemon favoritado</Styled.Text>}
     </Styled.Div>
+    
+    {/* Caso o valor de modal seja um objeto não-nulo, interpreta 
+     /* como se fosse o objeto do Pokémon que foi clicado e
+     /* apresenta modal do Pokémon clicado */}
+    {typeof modal === 'object' && modal !== null && (
+      <Modal closeModal={() => closeModal()}>
+        <PokemonInfo pokemon={modal} />
+      </Modal>
+    )}
+    </>
   );
-}
+};
 
 export default Favorites
