@@ -81,11 +81,13 @@ const Pokemons = () => {
     getPokemon(id);
     setPage(id)
     setOriginalPage(id);
+  }, [id, user, ])
+
+  useEffect(() => {
     if (user !== null) {
       getFavorites()
     }
-  }, [id, user, getFavorites])
-
+  })
 
   return (
       <Styled.Div>
