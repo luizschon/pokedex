@@ -30,7 +30,7 @@ const Favorites = () => {
      /* como se fosse o objeto do Pokémon que foi clicado e
      /* apresenta modal do Pokémon clicado */}
     {typeof modal === 'object' && modal !== null && (
-      <Modal closeModal={() => closeModal()}>
+      <Modal pokemon={modal} closeModal={() => closeModal()}>
         <PokemonInfo pokemon={modal} />
       </Modal>
     )}
