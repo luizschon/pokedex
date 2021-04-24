@@ -84,7 +84,7 @@ const Pokemons = () => {
     if (user !== null) {
       getFavorites()
     }
-  }, [id, user])
+  }, [id, user, getFavorites])
 
 
   return (
