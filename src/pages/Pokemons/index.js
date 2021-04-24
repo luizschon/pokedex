@@ -57,7 +57,7 @@ const Pokemons = () => {
   const redirect = (page) => {
     if (page > 0 && page < 34){
       history.push({
-        pathname: `/${page}`,
+        pathname: `/pokedex/${page}`,
       });
     } else {
       setPage(originalPage)
@@ -119,7 +119,7 @@ const Pokemons = () => {
           )}
   
         <Styled.PageButtonsDiv>
-          <Link to={{pathname: `/${handlePreviousPage(id)}`}}>
+          <Link to={`/pokedex/${handlePreviousPage(id)}`}>
             <CgChevronLeft size="2rem" color="black" />
           </Link>
           <Styled.Input
@@ -129,7 +129,7 @@ const Pokemons = () => {
             onChange={(event) => setPage(event.target.value)}
             onKeyPress={(event) => event.key === "Enter" && redirect(page)}
           />
-          <Link to={{pathname: `/${handleNextPage(id)}`}}>
+          <Link to={{pathname: `/pokedex/${handleNextPage(id)}`}}>
             <CgChevronRight size="2rem" color="black" />
           </Link>
         </Styled.PageButtonsDiv> 
