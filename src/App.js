@@ -15,7 +15,6 @@ export default function App() {
       <FavoritesProvider>
         <ModalProvider>
           <BrowserRouter>
-            <Header />
             <Switch>    
               <Route exact path="/" render={() => {return (<Redirect to="/pokedex/1" />)}} />
               <Route path="/favorites" children={<Favorites/>}/>
