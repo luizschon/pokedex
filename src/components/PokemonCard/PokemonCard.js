@@ -5,7 +5,8 @@ import * as api from '../../api';
 import { UserContext } from '../../context/UserContext';
 import { FavoritesContext } from '../../context/FavoritesContext';
 import { ModalContext } from '../../context/ModalContext';
-import * as Styled from '../../pages/Pokemons/styles';
+import { kindColors, ColorByKind } from "../../utils/ColorByKind"
+import * as Styled from './styles';
 
 const PokemonCard = ({ pokemon, isFavorite }) => {
   const [user, ] = useContext(UserContext);
@@ -33,19 +34,24 @@ const PokemonCard = ({ pokemon, isFavorite }) => {
   }
 
   return (
-    <div>
-      <Styled.Item><img src={pokemon.image_url} alt={pokemon.name} onClick={() => setModal(pokemon)}/></Styled.Item>
-      <Styled.Item><span>{pokemon.number}</span></Styled.Item>
-      <Styled.Item><span>{pokemon.name}</span></Styled.Item>
-      
-      <Styled.Item>
+    < Styled.Container 
+      color1 = { kindColors[ColorByKind(pokemon.kind, 0)]}
+      color2 = { kindColors[ColorByKind(pokemon.kind, 1)]}
+      favorite = {isFavorite}
+    >
+      <Styled.NameContainer login={user}>
+        <Styled.Name login={user}>{pokemon.name}</Styled.Name>
         {user && (
-          <Styled.FavButton onClick={() => {isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon)}}>
-            {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
-          </Styled.FavButton>
-        )}  
-      </Styled.Item>
-    </div>
+        <Styled.FavButton onClick={() => { isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon) }}>
+          {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
+        </Styled.FavButton>
+        )}
+      </Styled.NameContainer>
+
+      <Styled.Img className="poke-img" src={pokemon.image_url} alt={pokemon.name} onClick={() => setModal(pokemon)} animated/>
+    
+    </Styled.Container>
+      
   )
 }
 

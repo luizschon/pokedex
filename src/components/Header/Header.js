@@ -5,11 +5,13 @@ import { FaSignInAlt, FaSignOutAlt, FaStar, FaHome } from 'react-icons/fa';
 
 import { UserContext } from '../../context/UserContext';
 import { ModalContext } from '../../context/ModalContext';
+import { FavoritesContext } from '../../context/FavoritesContext';
 import * as Styled from './styles';
 
 const Header = () => {
   const [user, setUser] = useContext(UserContext)
-  const [, setModal] = useContext(ModalContext)
+  const [modal, setModal] = useContext(ModalContext)
+  const [, setFavorites] = useContext(FavoritesContext)
   const location = useLocation();
 
   return (
@@ -36,12 +38,12 @@ const Header = () => {
 
         <Styled.Diviser></Styled.Diviser>
     
-        <Link to="/" onClick={() => {localStorage.clear(); setUser(null);}}>
+        <Link to="/" onClick={() => {localStorage.clear(); setUser(null); setFavorites([])}}>
           <FaSignOutAlt size="2rem" color="black" />
         </Link>   
         </>
       ) : (
-        <div className="sign-button" onClick={() => setModal("login")}>
+            <div className="sign-button" onClick={() => { setModal("login");}}>
           <FaSignInAlt size="2rem" color="black" cursor="pointer" />
         </div>
       ) }

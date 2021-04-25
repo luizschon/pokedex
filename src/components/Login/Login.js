@@ -4,6 +4,7 @@ import * as api from "../../api"
 import { UserContext } from "../../context/UserContext"
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import * as Styled from "./styles"
 
 const LoginPage = ({ onSuccess }) => {
   const [, setUser] = useContext(UserContext);
@@ -69,27 +70,28 @@ const LoginPage = ({ onSuccess }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={(event) => handleSubmit(event, input)}>
+      <Styled.Login onSubmit={(event) => handleSubmit(event, input)}>
         {type === "login" ? (
           <>
-            <h2>Log-in</h2>
+            <h2>Sign-in</h2>
             <Input placeholder="Username" changeInput={changeInput} />
-            {error && <p>Esse usuário não existe!</p>}
-            <Button type="submit" title="Entrar" />
-            <Button title="Não possui uma conta? Cadastre-se" changeForm={changeForm} />
+            {error && <Styled.Error>Esse usuário não existe!</Styled.Error>}
+            <Styled.ButtonContainer>
+            <Button type="submit" title="Entrar" primary/>
+              <Button title="Não possui uma conta? Cadastre-se" changeForm={changeForm} />
+            </Styled.ButtonContainer>
           </>
         ) : (
           <>
             <h2>Sign-up</h2>
             <Input placeholder="Username" changeInput={changeInput} />
-            {error && <p>Esse usuário já está cadastrado!</p>}
-            <Button type="submit" title="Criar conta" />
+            {error && <Styled.Error>Esse usuário já está cadastrado!</Styled.Error>}
+              <Button type="submit" title="Criar conta" primary/>
               <Button title="Já possui uma conta? Acesse" changeForm={changeForm} />
           </>
         )}
-      </form>
-    </div>
+      </Styled.Login>
+
   );
 };
 

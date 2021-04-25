@@ -67,14 +67,6 @@ const Pokemons = () => {
     }
   }
 
-  //Armazena a lista de pokemons favoritos
-  const getFavorites = () => {
-    api.getFavorites(user)
-      .then((result) => {
-        setFavorites(result.data.pokemons)
-      })
-  }
-
   //Atualiza os pokemons mostrados quando a página muda
   //Atualiza a lista de favoritos quando a página muda
   //Atualiza a página atual e a página mostrada no input quando a página muda
@@ -83,32 +75,39 @@ const Pokemons = () => {
     getPokemon(id);
     setPage(id)
     setOriginalPage(id);
-  }, [id, user,])
+  }, [id])
 
   useEffect(() => {
-    if (user !== null) {
-      getFavorites()
+    if (user) {
+      api.getFavorites(user)
+        .then((result) => {
+          setFavorites(result.data.pokemons)
+        })
     }
-  })
+  }, [user, setFavorites])
 
   return (
-    <Styled.Div>
+    <>
       <MegaHeader>
         <Header />
         <SearchBar />
       </MegaHeader>
-      {pokemons ? (
-        pokemons.map(pokemon =>
-          <Styled.Grid key={pokemon.id}>
-            <PokemonCard
-              pokemon={pokemon}
-              isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)}
-            />
-          </Styled.Grid>)
-      ) : (
-        <h1>Carregando!</h1>
-      )
-      }
+
+      <Styled.Div>
+        {pokemons ? (
+          pokemons.map(pokemon =>
+            <div key={pokemon.id}>
+              <PokemonCard
+                pokemon={pokemon}
+                isFavorite={favorites.some((favPokemon) => favPokemon.name === pokemon.name)}
+              />
+            </div>
+          )
+        ) : (
+          <h1>Carregando!</h1>
+        )
+        }
+      </Styled.Div>
 
       {/* Caso o valor de modal seja um objeto não-nulo, interpreta 
            /* como se fosse o objeto do Pokémon que foi clicado e
@@ -127,7 +126,7 @@ const Pokemons = () => {
 
       <Styled.PageButtonsDiv>
         <Link to={`/pokedex/${handlePreviousPage(id)}`}>
-          <CgChevronLeft size="2rem" color="black" />
+          <CgChevronLeft size="2rem" color="black" cursor="pointer"/>
         </Link>
         <Styled.Input
           type="text"
@@ -140,7 +139,8 @@ const Pokemons = () => {
           <CgChevronRight size="2rem" color="black" />
         </Link>
       </Styled.PageButtonsDiv>
-    </Styled.Div>
+
+    </>
   );
 }
 

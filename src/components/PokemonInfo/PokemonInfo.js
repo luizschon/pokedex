@@ -1,5 +1,5 @@
 import * as Styled from './styles';
-import ColorByType from "./ColorByType"
+import {ColorByKind} from "../../utils/ColorByKind"
 
 const PokemonInfo = ({ pokemon }) => {
   //Se o pokemon tiver mais de um tipo, retorna os dois tipos separadamente
@@ -14,14 +14,14 @@ const PokemonInfo = ({ pokemon }) => {
 
   return (
     <div>
-      <Styled.InfoPage style={{ backgroundColor: ColorByType(pokemon.kind) }}>
+      <Styled.InfoPage style={{ backgroundColor: ColorByKind(pokemon.kind) }}>
         <Styled.Item><strong>{pokemon.id}</strong></Styled.Item>
         <Styled.Item><Styled.Img src={pokemon.image_url} alt={pokemon.name} /></Styled.Item>
-        <Styled.Item><strong>Name: {pokemon.name}</strong></Styled.Item>
+        <Styled.Item><strong>{pokemon.name}</strong></Styled.Item>
         <br />
-        <Styled.Item><strong>Weight: {pokemon.weight} m</strong></Styled.Item>
+        <Styled.Item><strong>Weight: {pokemon.weight/10} kg</strong></Styled.Item>
         <br />
-        <Styled.Item><strong>Height: {pokemon.height} kg</strong></Styled.Item>
+        <Styled.Item><strong>Height: {pokemon.height/10} m</strong></Styled.Item>
         <br />
         <Styled.Item><strong>Kind: {handleType(pokemon.kind)}</strong></Styled.Item>
         <br />

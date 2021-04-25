@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import * as Styled from './styles'
 
 const MegaHeader = ({ children }) => {

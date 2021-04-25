@@ -5,15 +5,14 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import { ModalProvider } from './context/ModalContext';
 import Pokemons from './pages/Pokemons/index';
 import Favorites from "./pages/Favorites/index";
-import Header from './components/Header/Header';
-
-document.body.style.background = "beige"
+import { GlobalStyle } from "./GlobalStyle"
 
 export default function App() {
   return (
     <UserProvider>
       <FavoritesProvider>
         <ModalProvider>
+          <GlobalStyle />
           <BrowserRouter>
             <Switch>    
               <Route exact path="/" render={() => {return (<Redirect to="/pokedex/1" />)}} />
