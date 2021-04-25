@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 
+import * as api from '../../api'
 import { ModalContext } from '../../context/ModalContext'
 import Modal from '../../components/Modal/Modal'
 import PokemonInfo from '../../components/PokemonInfo/PokemonInfo'
-import * as api from '../../api'
+import * as Styled from './styles'
 
 const SearchBar = () => {
   const [modal, setModal, closeModal] = useContext(ModalContext)
@@ -23,7 +24,6 @@ const SearchBar = () => {
     if (search) {
     api.searchPokemon(search)
       .then((res) => {
-        console.log(res.data);
         setPokemon(res.data);
         setModal("pokeinfo");
         event.target.reset();
@@ -35,16 +35,14 @@ const SearchBar = () => {
 
   return (
     <>
-    <div className="search-bar">
-      <form onSubmit={(event) => searchPokemon(event)}>
-        <IoSearchSharp />
-        <input 
-          placeholder='Busque um Pokémon!' 
-          onChange={handleInput} 
-          />
-      </form>
-    </div>
-    {pokemon && modal && (
+    <Styled.Form onSubmit={(event) => searchPokemon(event)}>
+        <IoSearchSharp size="22px" color="#8b8f95"/>
+      <Styled.Input 
+        placeholder='Busque um Pokémon!' 
+        onChange={handleInput} 
+        />
+      </Styled.Form>
+    {pokemon && modal === 'pokeinfo' && (
       <Modal pokemon={pokemon} closeModal={() => closeModal()}>
         <PokemonInfo pokemon={pokemon} />
       </Modal>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Header = styled.header`
   position: sticky;
   top: 0;
+  width: 97vw;
   height: 50px;
   display: flex;
   justify-content: space-between;
@@ -36,5 +37,5 @@ export const Title = styled.h2`
 `
 
 export const Username = styled.h3`
-  margin-right: 7px;
+  margin-right: 7px
 `

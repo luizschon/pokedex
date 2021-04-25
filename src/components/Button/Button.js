@@ -1,9 +1,11 @@
-const Button = ({ type, title, changeForm }) => {
+import * as Styled from './styles';
+
+const Button = ({ type, title, changeForm, primary }) => {
 
   return (
-    <button type={type === "submit" ? "submit" : "button"} onClick={changeForm}>
+    <Styled.Button type={type === "submit" ? "submit" : "button"} onClick={changeForm}>
       {title}
-    </button>
+    </Styled.Button>
   );
 };
 

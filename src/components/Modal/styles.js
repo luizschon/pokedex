@@ -9,11 +9,12 @@ export const Curtain = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0,0,0,0.5);
-  backdrop-filer: blur(1);
+  backdrop-filer: blur(1px);
+
 `
 
 export const PopUp = styled.div`
   background-color: white;
-  height: 90%;
-  width: 60%;
+  border-radius: 20px;
+  width: 500px;
 `

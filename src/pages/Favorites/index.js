@@ -5,7 +5,10 @@ import { ModalContext } from '../../context/ModalContext';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import Modal from '../../components/Modal/Modal';
 import PokemonInfo from '../../components/PokemonInfo/PokemonInfo';
+import Header from "../../components/Header/Header";
+import MegaHeader from "../../components/MegaHeader/MegaHeader";
 import * as Styled from "./styles";
+
 
 const Favorites = () => {
   const [favorites, ] = useContext(FavoritesContext);
@@ -13,15 +16,19 @@ const Favorites = () => {
 
   return(
     <>
+    <MegaHeader>
+      <Header />
+    </MegaHeader>
     <Styled.Div>    
       {favorites.length > 0 ?
       favorites.map(pokemon =>
-      <Styled.Grid key={pokemon.id}>
+      <div key={pokemon.id}>
         <PokemonCard 
           pokemon={pokemon} 
           isFavorite={true} 
         />
-      </Styled.Grid>)
+      </div>
+      )
       :
       <Styled.Text>Nao há nenhum pokemon favoritado</Styled.Text>}
     </Styled.Div>
