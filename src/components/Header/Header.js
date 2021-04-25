@@ -10,7 +10,7 @@ import * as Styled from './styles';
 
 const Header = () => {
   const [user, setUser] = useContext(UserContext)
-  const [modal, setModal] = useContext(ModalContext)
+  const [, setModal] = useContext(ModalContext)
   const [, setFavorites] = useContext(FavoritesContext)
   const location = useLocation();
 
