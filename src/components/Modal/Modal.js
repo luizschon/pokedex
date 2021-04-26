@@ -5,9 +5,8 @@ import {ColorByKind} from "../../utils/ColorByKind"
 
 const Modal = ({ pokemon, children, closeModal }) => {
   return (
-    <Styled.Curtain>
-      <Styled.PopUp style={pokemon ? { backgroundColor: ColorByKind(pokemon.kind) } : {}}>
-        <AiOutlineClose size="2rem" color="black" cursor="pointer" style={{ marginLeft: 20, marginTop: 20 }} onClick={closeModal} />
+    <Styled.Curtain onClick={closeModal}>
+      <Styled.PopUp >
         { children }
       </Styled.PopUp>
     </Styled.Curtain>

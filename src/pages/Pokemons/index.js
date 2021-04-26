@@ -114,7 +114,7 @@ const Pokemons = () => {
            /* apresenta modal do Pokémon clicado */}
       {typeof modal === 'object' && modal !== null && (
         <Modal pokemon={modal} closeModal={() => closeModal()}>
-          <PokemonInfo pokemon={modal} />
+          <PokemonInfo pokemon={modal} closeModal={() => closeModal()}/>
         </Modal>
       )}
       {/* Caso o valor de modal seja "login", aprensenta modal de Login*/}
