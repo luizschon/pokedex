@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Pokédex
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto foi criado com o objetivo de pôr em prática os aprendizados de React JS das aulas do processo trainee da CJR, Empresa Junior de Computação da Universidade de Brasília.
 
-## Available Scripts
+Foi implementada uma aplicação que faz listagem de diferentes Pokémons e apresentação de suas descrições, possibilitando acesso e cadastramento de usuários, que têm a habilidade de salvar Pokémons diversos como favoritos e visualizá-los em uma página de favoritos exclusiva para estes.
 
-In the project directory, you can run:
+A aplicação se encontra hospedada [aqui](https://pokenautilus.vercel.app/).
 
-### `yarn start`
+## Tecnologias utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Biblioteca JavaScript [React](https://reactjs.org/) para a construção da interface de usuário.
+- Biblioteca [axios](https://github.com/axios/axios) para requisições à API.
+- Biblioteca [react-router-dom](https://reactrouter.com/web/guides/quick-start) para criação e manutenção de rotas da aplicação.
+- Biblioteca [styled-components](https://styled-components.com/) para estilização dos componentes React.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Conhecimentos adquiridos
 
-### `yarn test`
+- Renderização de componentes funcionais modificáveis em tempo real usando Hooks do React.
+- Uso de localStorage para persistência dados do usuário. 
+- Criação e utilização de Context API em React para controle de estados globais.
+- Criação de rotas em Single-page Applications (SPA).
+- Requisições à API e tratamento de Promises e suas respostas.
+- Estilização em CSS e estilização condicional.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Executar a aplicação pelo código fonte
 
-### `yarn build`
+### Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `node -v 14.16`.
+- `yarn -v 1.22`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Clonando o repositório
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Dentro de um terminal, digite:
 
-### `yarn eject`
+`git clone https://github.com/luizschonarth/pokedex.git && cd pokedex`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Executar a aplicação
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Após clonar o repositório, digite `yarn install` para instalar as dependências e `yarn start` para executar a aplicação em [http://localhost:3000/](http://localhost:3000/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Autores
+- Luiz Carlos Schonarth Junior
+- Nathalia Oliveira Pereira
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
