@@ -14,6 +14,6 @@ export const Curtain = styled.div`
 
 export const PopUp = styled.div`
   border-radius: 20px;
-  height: 75%;
+  background-color: white;
   width: 500px;
 `

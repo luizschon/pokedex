@@ -1,12 +1,11 @@
 import { AiOutlineClose } from "react-icons/ai";
-
 import * as Styled from './styles'
-import {ColorByKind} from "../../utils/ColorByKind"
 
-const Modal = ({ pokemon, children, closeModal }) => {
+const Modal = ({ children, closeModal }) => {
   return (
-    <Styled.Curtain onClick={closeModal}>
+    <Styled.Curtain>
       <Styled.PopUp >
+        <AiOutlineClose size="2rem" color="black" cursor="pointer" style={{ marginLeft: 20, marginTop: 20, position: "absolute" }} onClick={closeModal} />
         { children }
       </Styled.PopUp>
     </Styled.Curtain>

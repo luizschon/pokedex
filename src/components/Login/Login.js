@@ -6,7 +6,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import * as Styled from "./styles"
 
-const LoginPage = ({ onSuccess }) => {
+const LoginPage = ({ onSuccess, closeModal }) => {
   const [, setUser] = useContext(UserContext);
 
   const [input, setInput] = useState(""); 
@@ -59,9 +59,7 @@ const LoginPage = ({ onSuccess }) => {
     setType(type === "login" ? "signup" : "login");
   };
 
-
   // Função que controla o submit do form entre auteticação e criação de
-
   // usuário.
   const handleSubmit = (event, username) => {
     event.preventDefault();
@@ -70,6 +68,7 @@ const LoginPage = ({ onSuccess }) => {
   };
 
   return (
+    <>
       <Styled.Login onSubmit={(event) => handleSubmit(event, input)}>
         {type === "login" ? (
           <>
@@ -91,7 +90,7 @@ const LoginPage = ({ onSuccess }) => {
           </>
         )}
       </Styled.Login>
-
+    </>
   );
 };
 
