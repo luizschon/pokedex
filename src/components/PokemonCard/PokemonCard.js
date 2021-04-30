@@ -43,7 +43,7 @@ const PokemonCard = ({ pokemon, isFavorite }) => {
         <Styled.Name login={user}>{pokemon.name}</Styled.Name>
         {user && (
         <Styled.FavButton onClick={() => { isFavorite ? removeFavorite(pokemon) : addFavorite(pokemon) }}>
-          {isFavorite ? <AiFillStar size="2rem" color="yellow" /> : <AiOutlineStar size="2rem" color="yellow" />}
+          {isFavorite ? <AiFillStar size="30px" color="yellow" /> : <AiOutlineStar size="30px" color="yellow" />}
         </Styled.FavButton>
         )}
       </Styled.NameContainer>

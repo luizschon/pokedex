@@ -126,7 +126,7 @@ const Pokemons = () => {
 
       <Styled.PageButtonsDiv>
         <Link to={`/pokedex/${handlePreviousPage(id)}`}>
-          <CgChevronLeft size="2rem" color="black" cursor="pointer"/>
+          <CgChevronLeft size="30px" color="black" cursor="pointer"/>
         </Link>
         <Styled.Input
           type="text"
@@ -136,7 +136,7 @@ const Pokemons = () => {
           onKeyPress={(event) => event.key === "Enter" && redirect(page)}
         />
         <Link to={{ pathname: `/pokedex/${handleNextPage(id)}` }}>
-          <CgChevronRight size="2rem" color="black" />
+          <CgChevronRight size="30px" color="black" />
         </Link>
       </Styled.PageButtonsDiv>
 

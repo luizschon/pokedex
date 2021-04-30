@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <Styled.Header>
       <Styled.LeftItems>
-        <CgPokemon size="2rem" color="black" />
+        <CgPokemon size="30px" color="black" />
         <Styled.Title>Pokédex</Styled.Title>
       </Styled.LeftItems>
       
@@ -28,23 +28,23 @@ const Header = () => {
 
         {location.pathname === '/favorites' ? (
           <Link to="/">
-            <FaHome size="2rem" color="black" />
+            <FaHome size="30px" color="black" />
           </Link>
         ) : (
           <Link to = "/favorites">
-            <FaStar size="2rem" color="black" />
+            <FaStar size="30px" color="black" />
           </Link>
         )}
 
         <Styled.Diviser></Styled.Diviser>
     
         <Link to="/" onClick={() => {localStorage.clear(); setUser(null); setFavorites([])}}>
-          <FaSignOutAlt size="2rem" color="black" />
+            <FaSignOutAlt size="30px" color="black" />
         </Link>   
         </>
       ) : (
             <div className="sign-button" onClick={() => { setModal("login");}}>
-          <FaSignInAlt size="2rem" color="black" cursor="pointer" />
+          <FaSignInAlt size="30px" color="black" cursor="pointer" />
         </div>
       ) }
       </Styled.RightItems>
