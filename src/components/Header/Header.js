@@ -18,7 +18,7 @@ const Header = () => {
     <Styled.Header>
       <Styled.LeftItems>
         <CgPokemon size="30px" color="black" />
-        <Styled.Title>Pokédex</Styled.Title>
+        <Styled.Title>PokéNautilus</Styled.Title>
       </Styled.LeftItems>
       
       <Styled.RightItems>
